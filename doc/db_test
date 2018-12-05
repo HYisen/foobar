@@ -4,7 +4,7 @@ MATCH (n) DETACH DELETE n;
 //show table
 MATCH (n) RETURN n;
 
-                 //Find one's friends
+//Find one's friends
 MATCH (a:Person {uid:10001})-[:FRIEND]-(b:Person)
 RETURN b;
 
@@ -16,7 +16,7 @@ RETURN b,c;
 MATCH (a:Person {uid:10002})-[:FRIEND]-(b:Person)-[:FRIEND]-(c:Person)
 WHERE NOT (a)-[:FRIEND]-(c)
 RETURN DISTINCT c;
-//Mediations
+//Mediation
 MATCH (a:Person {uid:10002})-[:FRIEND]-(b:Person)-[:FRIEND]-(c:Person {uid:10003})
 RETURN DISTINCT b;
 //one path
@@ -32,20 +32,20 @@ RETURN r.timestamp,p
   SKIP 0
   LIMIT 10;
 
-  //Find friends' papers
-MATCH (a:Person {uid:10001})-[FRIEND]-(b)-[r:PUBLISH]->(p)
+//Find friends' papers
+MATCH (a:Person {uid:10001})-[:FRIEND]-(b)-[r:PUBLISH]->(p)
 RETURN r.timestamp,p
 ORDER BY r.timestamp DESC
 SKIP 0
 LIMIT 10;
 
-//regist
+//register
 CREATE (:Account {username:"betty",password:"2"})-[:LINK]->(:Person {uid:20001,nickname:"Betty"});
 
 //publish
 MATCH (a:Person {uid:20001})
-CREATE (a)-[:PUBLISH {timestamp:localdatetime('2017-01-01T4:40:1.12')}]->(p:Paper {pid:40008,title:"Intro",content:"I'm Betty."})
-CREATE (a)-[:PUBLISH {timestamp:localdatetime('2018-01-01T4:40:1.12')}]->(q:Paper {pid:40009,title:"fsdhg",content:"aregh"});
+CREATE (a)-[:PUBLISH {timestamp:localdatetime('2017-01-01T04:40:1.12')}]->(p:Paper {pid:40008,title:"Intro",content:"I'm Betty."})
+CREATE (a)-[:PUBLISH {timestamp:localdatetime('2018-01-01T04:40:1.12')}]->(q:Paper {pid:40009,title:"fsdhg",content:"aregh"});
 
 //undo publish
 MATCH (a:Person {nickname:"Betty"})-[:PUBLISH]->(p:Paper {pid:40009})
@@ -60,7 +60,7 @@ DETACH DELETE person,account,paper;
 MATCH (src:Person {uid:10000})
 MATCH (dst:Person {uid:20001})
 WHERE NOT ((src)-[:FRIEND]-(dst) OR (src)-[:INVITE]-(dst))
-CREATE (src)-[:INVITE {timestamp:localdatetime('2018-10-01T4:40:1.12'),message:"Hello."}]->(dst);
+CREATE (src)-[:INVITE {timestamp:localdatetime('2018-10-01T04:40:1.12'),message:"Hello."}]->(dst);
 
 //revoke friend request
 MATCH (src:Person {uid:10000})-[r:INVITE]->(dst:Person {uid:20001})
