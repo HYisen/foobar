@@ -1,4 +1,4 @@
-package net.alexhyisen.foobar;
+package net.alexhyisen.foobar.module;
 
 public class Greeting {
     private final long count;
