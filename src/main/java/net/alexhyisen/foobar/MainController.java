@@ -1,8 +1,6 @@
 package net.alexhyisen.foobar;
 
-import net.alexhyisen.foobar.module.Paper;
-import net.alexhyisen.foobar.module.Person;
-import net.alexhyisen.foobar.module.Publication;
+import net.alexhyisen.foobar.module.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,5 +58,10 @@ public class MainController {
     @DeleteMapping("/{uid}/paper/{pid}")
     public void removePaper(@PathVariable long uid, @PathVariable long pid) {
         mainService.delPaper(uid, pid);
+    }
+
+    @PostMapping("/register")
+    public Link createUser(@RequestBody RegisterInfo info) {
+        return mainService.addUser(info);
     }
 }

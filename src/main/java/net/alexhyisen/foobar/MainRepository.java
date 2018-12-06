@@ -1,5 +1,6 @@
 package net.alexhyisen.foobar;
 
+import net.alexhyisen.foobar.module.Link;
 import net.alexhyisen.foobar.module.Person;
 import net.alexhyisen.foobar.module.Publication;
 import org.springframework.data.neo4j.annotation.Query;
@@ -44,4 +45,16 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
 
     @Query("MATCH (p:Paper) RETURN p.pid AS num ORDER BY num DESC LIMIT 1;")
     long findMaxPid();
+
+    @Query("CREATE (a:Account {username:{username},password:{password}})-[l:LINK]->" +
+            "(p:Person {uid:{uid},nickname:{nickname}}) RETURN a,l,p;")
+    Link addUser(
+            @Param("username") String username,
+            @Param("password") String password,
+            @Param("uid") long uid,
+            @Param("nickname") String nickname
+    );
+
+    @Query("MATCH (p:Person) RETURN p.uid AS num ORDER BY num DESC LIMIT 1;")
+    long findMaxUid();
 }

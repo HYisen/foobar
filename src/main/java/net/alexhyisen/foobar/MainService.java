@@ -1,7 +1,9 @@
 package net.alexhyisen.foobar;
 
+import net.alexhyisen.foobar.module.Link;
 import net.alexhyisen.foobar.module.Person;
 import net.alexhyisen.foobar.module.Publication;
+import net.alexhyisen.foobar.module.RegisterInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ public class MainService {
     private final MainRepository mainRepository;
 
     private static long prevPid = 0;
+    private static long prevUid = 0;
 
     @Autowired
     public MainService(MainRepository mainRepository) {
@@ -62,5 +65,17 @@ public class MainService {
             prevPid = mainRepository.findMaxPid();
         }
         return ++prevPid;
+    }
+
+    private long getNextUid() {
+        if (prevUid == 0) {
+            prevUid = mainRepository.findMaxUid();
+        }
+        return ++prevUid;
+    }
+
+    @Transactional()
+    public Link addUser(RegisterInfo info) {
+        return mainRepository.addUser(info.getUsername(), info.getPassword(), getNextUid(), info.getNickname());
     }
 }
