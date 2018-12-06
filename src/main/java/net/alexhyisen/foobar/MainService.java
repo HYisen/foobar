@@ -50,4 +50,9 @@ public class MainService {
         var pid = timestamp % 1000;
         return mainRepository.addPaper(uid, pid, timestamp, title, content);
     }
+
+    @Transactional()
+    public void delPaper(long uid, long pid) {
+        mainRepository.delPaper(uid, pid);
+    }
 }

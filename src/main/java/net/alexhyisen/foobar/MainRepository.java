@@ -43,4 +43,8 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
             @Param("title") String title,
             @Param("content") String content
     );
+
+
+    @Query("MATCH (a:Person {uid:{uid}})-[:PUBLISH]->(p:Paper {pid:{pid}}) DETACH DELETE p;")
+    void delPaper(@Param("uid") long uid, @Param("pid") long pid);
 }
