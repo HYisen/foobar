@@ -1,12 +1,10 @@
 package net.alexhyisen.foobar;
 
+import net.alexhyisen.foobar.module.Paper;
 import net.alexhyisen.foobar.module.Person;
 import net.alexhyisen.foobar.module.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -52,5 +50,10 @@ public class MainController {
                                      @RequestParam(value = "skip", defaultValue = "0") long skip,
                                      @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findAgents(srcUid, dstUid, skip, limit);
+    }
+
+    @PostMapping("/{uid}/paper")
+    public Publication papers(@PathVariable long uid, @RequestBody Paper paper) {
+        return mainService.addPaper(uid, paper.getTitle(), paper.getContent());
     }
 }

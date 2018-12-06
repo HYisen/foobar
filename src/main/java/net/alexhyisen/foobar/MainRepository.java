@@ -27,4 +27,20 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
             " RETURN DISTINCT b ORDER BY b.uid SKIP {s} LIMIT {l};")
     Collection<Person> findAgents(@Param("srcUid") Long srcUid, @Param("dstUid") Long dstUid,
                                   @Param("s") Long skip, @Param("l") Long limit);
+
+//    @Query("MATCH (a:Person {uid:{pub.person.uid}})" +
+//            " CREATE (a)-[:PUBLISH {timestamp:{pub.timestamp}}]->" +
+//            "(p:Paper {pid:{pub.paper.pid},title:{pub.paper.title},content:{pub.paper.content}})")
+//    Publication addPaper(@Param("pub") Publication publication);
+
+    @Query("MATCH (a:Person {uid:{uid}})" +
+            " CREATE (a)-[r:PUBLISH {timestamp:{timestamp}}]->(p:Paper {pid:{pid},title:{title},content:{content}})" +
+            " RETURN a,r,p;")
+    Publication addPaper(
+            @Param("uid") long uid,
+            @Param("pid") long pid,
+            @Param("timestamp") long timestamp,
+            @Param("title") String title,
+            @Param("content") String content
+    );
 }

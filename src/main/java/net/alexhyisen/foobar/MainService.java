@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Collection;
 
 @Service
@@ -40,5 +41,13 @@ public class MainService {
     @Transactional(readOnly = true)
     public Collection<Person> findAgents(long srcUid, long dstUid, long skip, long limit) {
         return mainRepository.findAgents(srcUid, dstUid, skip, limit);
+    }
+
+    @Transactional()
+    public Publication addPaper(long uid, String title, String content) {
+        var timestamp = Instant.now().toEpochMilli();
+        //TODO: a better procedure to generate pid
+        var pid = timestamp % 1000;
+        return mainRepository.addPaper(uid, pid, timestamp, title, content);
     }
 }
