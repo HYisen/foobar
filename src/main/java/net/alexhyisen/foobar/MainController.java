@@ -53,12 +53,12 @@ public class MainController {
     }
 
     @PostMapping("/{uid}/paper")
-    public Publication papers(@PathVariable long uid, @RequestBody Paper paper) {
+    public Publication createPaper(@PathVariable long uid, @RequestBody Paper paper) {
         return mainService.addPaper(uid, paper.getTitle(), paper.getContent());
     }
 
     @DeleteMapping("/{uid}/paper/{pid}")
-    public void papers(@PathVariable long uid, @PathVariable long pid) {
+    public void removePaper(@PathVariable long uid, @PathVariable long pid) {
         mainService.delPaper(uid, pid);
     }
 }
