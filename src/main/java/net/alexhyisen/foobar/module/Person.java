@@ -1,21 +1,40 @@
 package net.alexhyisen.foobar.module;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @NodeEntity
 public class Person {
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
     private Long uid;
     private String nickname;
 
-    @Relationship(type = "FRIEND")
-    private List<Person> friends=new ArrayList<>();
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
