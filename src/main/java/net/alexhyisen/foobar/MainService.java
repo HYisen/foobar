@@ -1,6 +1,7 @@
 package net.alexhyisen.foobar;
 
 import net.alexhyisen.foobar.module.MainRepository;
+import net.alexhyisen.foobar.module.Person;
 import net.alexhyisen.foobar.module.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,10 @@ public class MainService {
     @Transactional(readOnly = true)
     public Collection<Publication> findPublications(long uid, long skip, long limit) {
         return mainRepository.findPublications(uid, skip, limit);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<Person> findFriends(long uid, long skip, long limit) {
+        return mainRepository.findFriends(uid, skip, limit);
     }
 }
