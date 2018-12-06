@@ -1,12 +1,12 @@
 package net.alexhyisen.foobar;
 
 import net.alexhyisen.foobar.module.MainRepository;
-import net.alexhyisen.foobar.module.Paper;
+import net.alexhyisen.foobar.module.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public class MainService {
@@ -17,9 +17,8 @@ public class MainService {
         this.mainRepository = mainRepository;
     }
 
-    @Transactional()
-    public List<Paper> findFriendsPapers(Long uid) {
-        final List<Paper> friendsPapers = mainRepository.findFriendsPapers(uid);
-        return friendsPapers;
+    @Transactional(readOnly = true)
+    public Collection<Publication> findPublications(long uid, long skip, long limit) {
+        return mainRepository.findPublications(uid, skip, limit);
     }
 }
