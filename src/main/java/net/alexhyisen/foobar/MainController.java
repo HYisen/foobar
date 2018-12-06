@@ -39,4 +39,11 @@ public class MainController {
                                            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findMoments(uid, skip, limit);
     }
+
+    @GetMapping("/{uid}/stranger")
+    public Collection<Person> strangers(@PathVariable long uid,
+                                        @RequestParam(value = "skip", defaultValue = "0") long skip,
+                                        @RequestParam(value = "limit", defaultValue = "10") long limit) {
+        return mainService.findStrangers(uid, skip, limit);
+    }
 }

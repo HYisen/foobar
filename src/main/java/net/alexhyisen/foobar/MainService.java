@@ -32,4 +32,9 @@ public class MainService {
     public Collection<Publication> findMoments(long uid, long skip, long limit) {
         return mainRepository.findMoments(uid, skip, limit);
     }
+
+    @Transactional(readOnly = true)
+    public Collection<Person> findStrangers(long uid, long skip, long limit) {
+        return mainRepository.findStrangers(uid, skip, limit);
+    }
 }
