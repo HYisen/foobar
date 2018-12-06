@@ -18,7 +18,11 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     Collection<Publication> findMoments(@Param("uid") Long uid, @Param("s") Long skip, @Param("l") Long limit);
 
     @Query("MATCH (a:Person {uid:{uid}})-[:FRIEND]-(b:Person)-[:FRIEND]-(c:Person)" +
-            " WHERE NOT (a)-[:FRIEND]-(c)" +
-            " RETURN c ORDER BY c.uid SKIP {s} LIMIT {l};")
+            " WHERE NOT (a)-[:FRIEND]-(c) RETURN c ORDER BY c.uid SKIP {s} LIMIT {l};")
     Collection<Person> findStrangers(@Param("uid") Long uid, @Param("s") Long skip, @Param("l") Long limit);
+
+    @Query("MATCH (a:Person {uid:{srcUid}})-[:FRIEND]-(b:Person)-[:FRIEND]-(c:Person {uid:{dstUid}})" +
+            " RETURN DISTINCT b ORDER BY b.uid SKIP {s} LIMIT {l};")
+    Collection<Person> findAgents(@Param("srcUid") Long srcUid, @Param("dstUid") Long dstUid,
+                                  @Param("s") Long skip, @Param("l") Long limit);
 }

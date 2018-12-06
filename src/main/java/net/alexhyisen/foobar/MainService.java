@@ -37,4 +37,9 @@ public class MainService {
     public Collection<Person> findStrangers(long uid, long skip, long limit) {
         return mainRepository.findStrangers(uid, skip, limit);
     }
+
+    @Transactional(readOnly = true)
+    public Collection<Person> findAgents(long srcUid, long dstUid, long skip, long limit) {
+        return mainRepository.findAgents(srcUid, dstUid, skip, limit);
+    }
 }
