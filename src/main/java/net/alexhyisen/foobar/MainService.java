@@ -13,6 +13,8 @@ import java.util.Collection;
 public class MainService {
     private final MainRepository mainRepository;
 
+    private static long prevPid = 0;
+
     @Autowired
     public MainService(MainRepository mainRepository) {
         this.mainRepository = mainRepository;
@@ -46,13 +48,19 @@ public class MainService {
     @Transactional()
     public Publication addPaper(long uid, String title, String content) {
         var timestamp = Instant.now().toEpochMilli();
-        //TODO: a better procedure to generate pid
-        var pid = timestamp % 1000;
+        var pid = getNextPid();
         return mainRepository.addPaper(uid, pid, timestamp, title, content);
     }
 
     @Transactional()
     public void delPaper(long uid, long pid) {
         mainRepository.delPaper(uid, pid);
+    }
+
+    private long getNextPid() {
+        if (prevPid == 0) {
+            prevPid = mainRepository.findMaxPid();
+        }
+        return ++prevPid;
     }
 }

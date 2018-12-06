@@ -28,11 +28,6 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     Collection<Person> findAgents(@Param("srcUid") Long srcUid, @Param("dstUid") Long dstUid,
                                   @Param("s") Long skip, @Param("l") Long limit);
 
-//    @Query("MATCH (a:Person {uid:{pub.person.uid}})" +
-//            " CREATE (a)-[:PUBLISH {timestamp:{pub.timestamp}}]->" +
-//            "(p:Paper {pid:{pub.paper.pid},title:{pub.paper.title},content:{pub.paper.content}})")
-//    Publication addPaper(@Param("pub") Publication publication);
-
     @Query("MATCH (a:Person {uid:{uid}})" +
             " CREATE (a)-[r:PUBLISH {timestamp:{timestamp}}]->(p:Paper {pid:{pid},title:{title},content:{content}})" +
             " RETURN a,r,p;")
@@ -44,7 +39,9 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
             @Param("content") String content
     );
 
-
     @Query("MATCH (a:Person {uid:{uid}})-[:PUBLISH]->(p:Paper {pid:{pid}}) DETACH DELETE p;")
     void delPaper(@Param("uid") long uid, @Param("pid") long pid);
+
+    @Query("MATCH (p:Paper) RETURN p.pid AS num ORDER BY num DESC LIMIT 1;")
+    long findMaxPid();
 }

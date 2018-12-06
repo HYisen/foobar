@@ -40,7 +40,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/10000/paper/492
+DELETE http://localhost:8080/10000/paper/4000002
 Content-Type: application/json
 
 ###
