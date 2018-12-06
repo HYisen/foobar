@@ -1,6 +1,5 @@
 package net.alexhyisen.foobar;
 
-import net.alexhyisen.foobar.module.MainRepository;
 import net.alexhyisen.foobar.module.Person;
 import net.alexhyisen.foobar.module.Publication;
 import org.springframework.beans.factory.annotation.Autowired;

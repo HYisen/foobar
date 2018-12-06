@@ -49,8 +49,8 @@ public class MainController {
 
     @GetMapping("/{srcUid}/agent/{dstUid}")
     public Collection<Person> agents(@PathVariable long srcUid, @PathVariable long dstUid,
-                                        @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                        @RequestParam(value = "limit", defaultValue = "10") long limit) {
+                                     @RequestParam(value = "skip", defaultValue = "0") long skip,
+                                     @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findAgents(srcUid, dstUid, skip, limit);
     }
 }
