@@ -39,6 +39,13 @@ ORDER BY r.timestamp DESC
 SKIP 0
 LIMIT 10;
 
+//Find one's timeline, i.e, one and its friends' papers
+MATCH (a:Person {uid:10001})-[:FRIEND*0..1]-(b)-[r:PUBLISH]->(p)
+RETURN b,r,p
+  ORDER BY r.timestamp DESC
+  SKIP 0
+  LIMIT 10;
+
 //register
 CREATE (:Account {username:"betty",password:"2"})-[:LINK]->(:Person {uid:20001,nickname:"Betty"});
 

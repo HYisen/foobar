@@ -12,4 +12,8 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
 
     @Query("MATCH (a:Person {uid:{uid}})-[:FRIEND]-(b:Person) RETURN b ORDER BY b.uid SKIP {s} LIMIT {l};")
     Collection<Person> findFriends(@Param("uid") Long uid, @Param("s") Long skip, @Param("l") Long limit);
+
+    @Query("MATCH (a:Person {uid:10001})-[:FRIEND*0..1]-(b)-[r:PUBLISH]->(p) RETURN b,r,p" +
+            " ORDER BY r.timestamp DESC SKIP {s} LIMIT {l};")
+    Collection<Publication> findMoments(@Param("uid") Long uid, @Param("s") Long skip, @Param("l") Long limit);
 }

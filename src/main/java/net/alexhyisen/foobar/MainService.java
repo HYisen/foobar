@@ -27,4 +27,9 @@ public class MainService {
     public Collection<Person> findFriends(long uid, long skip, long limit) {
         return mainRepository.findFriends(uid, skip, limit);
     }
+
+    @Transactional(readOnly = true)
+    public Collection<Publication> findMoments(long uid, long skip, long limit) {
+        return mainRepository.findMoments(uid, skip, limit);
+    }
 }
