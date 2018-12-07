@@ -1,9 +1,6 @@
 package net.alexhyisen.foobar;
 
-import net.alexhyisen.foobar.module.Link;
-import net.alexhyisen.foobar.module.Person;
-import net.alexhyisen.foobar.module.Publication;
-import net.alexhyisen.foobar.module.RegisterInfo;
+import net.alexhyisen.foobar.module.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,9 +47,11 @@ public class MainService {
 
     @Transactional()
     public Publication addPaper(long uid, String title, String content) {
-        var timestamp = Instant.now().toEpochMilli();
-        var pid = getNextPid();
-        return mainRepository.addPaper(uid, pid, timestamp, title, content);
+        return mainRepository.addPaper(uid, getNextPid(), genTimestamp(), title, content);
+    }
+
+    private static long genTimestamp() {
+        return Instant.now().toEpochMilli();
     }
 
     @Transactional()
@@ -78,4 +77,10 @@ public class MainService {
     public Link addUser(RegisterInfo info) {
         return mainRepository.addUser(info.getUsername(), info.getPassword(), getNextUid(), info.getNickname());
     }
+
+    @Transactional()
+    public Invitation createInvitation(long srcUid, long dstUid, String message) {
+        return mainRepository.createInvitation(srcUid, dstUid, genTimestamp(), message);
+    }
+
 }

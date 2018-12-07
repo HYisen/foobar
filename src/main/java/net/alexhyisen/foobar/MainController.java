@@ -64,4 +64,9 @@ public class MainController {
     public Link createUser(@RequestBody RegisterInfo info) {
         return mainService.addUser(info);
     }
+
+    @PostMapping("/{srcUid}/invite/{dstUid}")
+    public Invitation invite(@PathVariable long srcUid, @PathVariable long dstUid, @RequestBody String message) {
+        return mainService.createInvitation(srcUid, dstUid, message);
+    }
 }

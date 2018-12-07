@@ -66,3 +66,10 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:8080/10005/invite/10000
+Content-Type: application/json
+
+"Long time no see, old friend."
+
+###

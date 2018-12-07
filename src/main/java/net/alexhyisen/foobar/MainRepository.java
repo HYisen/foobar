@@ -1,5 +1,6 @@
 package net.alexhyisen.foobar;
 
+import net.alexhyisen.foobar.module.Invitation;
 import net.alexhyisen.foobar.module.Link;
 import net.alexhyisen.foobar.module.Person;
 import net.alexhyisen.foobar.module.Publication;
@@ -57,4 +58,15 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
 
     @Query("MATCH (p:Person) RETURN p.uid AS num ORDER BY num DESC LIMIT 1;")
     long findMaxUid();
+
+    @Query("MATCH (src:Person {uid: {srcUid}}) MATCH (dst:Person {uid: {dstUid}})" +
+            " WHERE NOT ((src)-[:FRIEND]-(dst) OR (src)-[:INVITE]-(dst))\n" +
+            "CREATE (src)-[l:INVITE {timestamp: {timestamp}, message: {message}}]->(dst)" +
+            "RETURN src,l,dst")
+    Invitation createInvitation(
+            @Param("srcUid") long srcUid,
+            @Param("dstUid") long dstUid,
+            @Param("timestamp") long timestamp,
+            @Param("message") String message
+    );
 }
