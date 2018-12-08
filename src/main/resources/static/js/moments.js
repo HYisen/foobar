@@ -16,7 +16,13 @@ function showusername()
 
     ajaxGet("http://localhost:8080/api/10000/paper",(text)=>{
         console.log(text);
-        document.getElementById("username").innerHTML = text;
+        let json = JSON.parse(text);
+        for (let i in json) {
+            document.getElementById("time_"+i).innerText = json[i].timestamp;
+            document.getElementById("nickname_"+i).innerText = json[i].person.nickname;
+            document.getElementById("title_"+i).innerText = json[i].paper.title;
+            document.getElementById("content_"+i).innerHTML = json[i].paper.content;
+        }
     })
 }
 
