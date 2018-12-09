@@ -1,4 +1,4 @@
-function showMoments()
+function showMyPaper()
 {
     console.log("BANG!");
 
@@ -14,7 +14,7 @@ function showMoments()
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10000/moment",(text)=>{
+    ajaxGet("http://localhost:8080/10000/paper",(text)=>{
         console.log(text);
         let json = JSON.parse(text);
         for (let i in json) {
