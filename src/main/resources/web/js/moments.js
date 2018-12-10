@@ -1,7 +1,6 @@
 function showMoments() {
     pages --;
     console.log("BANG!");
-
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
