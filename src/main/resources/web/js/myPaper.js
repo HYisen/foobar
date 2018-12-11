@@ -13,7 +13,7 @@ function showMoments() {
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10002/moment?limit=" + pages * itemInPages, (text) => {
+    ajaxGet("http://localhost:8080/10002/paper?limit=" + pages * itemInPages, (text) => {
             console.log(text);
             let json = JSON.parse(text);
             let oldContainer = document.getElementById("momentContainer");
@@ -63,7 +63,7 @@ function loadMoreMoments() {
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10002/moment?skip=" + pages * itemInPages + "&limit=" + itemInPages, (text) => {
+    ajaxGet("http://localhost:8080/10002/paper?skip=" + pages * itemInPages + "&limit=" + itemInPages, (text) => {
             console.log(text);
             let json = JSON.parse(text);
             let container = document.getElementById("momentContainer");

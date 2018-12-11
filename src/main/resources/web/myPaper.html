@@ -3,69 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>my paper</title>
+    <link rel="stylesheet" href="css/myPaper.css" type="text/css" />
+    <script language="JavaScript">
+        let pages = 0;
+        let end = false;
+        let synch = false;
+        let itemInPages = 5;
+        setTimeout("showMoments()", 60000);
+    </script>
 </head>
-<body>
-<button onclick="showMyPaper()">show my paper</button>
-<table>
-    <tr><td><p><span id = "time_0"></span></p></td>
-        <td><p><span id = "nickname_0"></span></p></td>
-        <td><p><span id = "title_0"></span></p></td></tr>
-    <tr><td><p><span id = "content_0"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_1"></span></p></td>
-        <td><p><span id = "nickname_1"></span></p></td>
-        <td><p><span id = "title_1"></span></p></td></tr>
-    <tr><td><p><span id = "content_1"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_2"></span></p></td>
-        <td><p><span id = "nickname_2"></span></p></td>
-        <td><p><span id = "title_2"></span></p></td></tr>
-    <tr><td><p><span id = "content_2"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_3"></span></p></td>
-        <td><p><span id = "nickname_3"></span></p></td>
-        <td><p><span id = "title_3"></span></p></td></tr>
-    <tr><td><p><span id = "content_3"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_4"></span></p></td>
-        <td><p><span id = "nickname_4"></span></p></td>
-        <td><p><span id = "title_4"></span></p></td></tr>
-    <tr><td><p><span id = "content_4"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_5"></span></p></td>
-        <td><p><span id = "nickname_5"></span></p></td>
-        <td><p><span id = "title_5"></span></p></td></tr>
-    <tr><td><p><span id = "content_5"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_6"></span></p></td>
-        <td><p><span id = "nickname_6"></span></p></td>
-        <td><p><span id = "title_6"></span></p></td></tr>
-    <tr><td><p><span id = "content_6"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_7"></span></p></td>
-        <td><p><span id = "nickname_7"></span></p></td>
-        <td><p><span id = "title_7"></span></p></td></tr>
-    <tr><td><p><span id = "content_7"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_8"></span></p></td>
-        <td><p><span id = "nickname_8"></span></p></td>
-        <td><p><span id = "title_8"></span></p></td></tr>
-    <tr><td><p><span id = "content_8"></span></p></td></tr>
-</table>
-<table>
-    <tr><td><p><span id = "time_9"></span></p></td>
-        <td><p><span id = "nickname_9"></span></p></td>
-        <td><p><span id = "title_9"></span></p></td></tr>
-    <tr><td><p><span id = "content_9"></span></p></td></tr>
-</table>
+<body onload="loadMoreMoments()">
+<button onclick="showMoments()">refresh</button>
+<p id="momentContainer"/>
+<script language="JavaScript">
+    window.onscroll = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            synch = false;
+            loadMoreMoments();
+        }
+    };
+    window.onresize = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            loadMoreMoments();
+        }
+    };
+</script>
 <script type="text/javascript" src="js/myPaper.js"></script>
+<script type="text/javascript" src="js/windowUtil.js"></script>
 </body>
 </html>
