@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>moments</title>
+    <link rel="stylesheet" href="css/moments.css" type="text/css" />
+    <script language="JavaScript">
+        let pages = 0;
+        let end = false;
+        let synch = true;
+        let itemInPages = 2;
+        setTimeout("showMoments()", 60000);
+    </script>
+</head>
+<body onload="loadMoreMoments()">
+<button onclick="showMoments()">show moments</button>
+<p id="momentContainer"/>
+<script language="JavaScript">
+    window.onscroll = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (!end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            synch = false;
+            loadMoreMoments();
+        }
+    };
+    window.onresize = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            loadMoreMoments();
+        }
+    };
+</script>
+<script type="text/javascript" src="js/moments.js"></script>
+<script type="text/javascript" src="js/windowUtil.js"></script>
+</body>
+</html>
