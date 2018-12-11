@@ -74,4 +74,18 @@ public class MainController {
     public void invite(@PathVariable long srcUid, @PathVariable long dstUid) {
         mainService.deleteInvitation(srcUid, dstUid);
     }
+
+    @GetMapping("/{uid}/invite/import")
+    public Collection<Invitation> importInvitations(@PathVariable long uid,
+                                                    @RequestParam(value = "skip", defaultValue = "0") long skip,
+                                                    @RequestParam(value = "limit", defaultValue = "10") long limit) {
+        return mainService.findImportInvitations(uid, skip, limit);
+    }
+
+    @GetMapping("/{uid}/invite/export")
+    public Collection<Invitation> exportInvitations(@PathVariable long uid,
+                                                    @RequestParam(value = "skip", defaultValue = "0") long skip,
+                                                    @RequestParam(value = "limit", defaultValue = "10") long limit) {
+        return mainService.findExportInvitations(uid, skip, limit);
+    }
 }

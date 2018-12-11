@@ -78,3 +78,15 @@ DELETE http://localhost:8080/10005/invite/10000
 Content-Type: application/json
 
 ###
+
+
+GET http://localhost:8080/10005/invite/export
+Content-Type: application/json
+
+###
+
+
+GET http://localhost:8080/10000/invite/import
+Content-Type: application/json
+
+###
