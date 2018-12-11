@@ -83,4 +83,8 @@ public class MainService {
         return mainRepository.createInvitation(srcUid, dstUid, genTimestamp(), message);
     }
 
+    @Transactional()
+    public void deleteInvitation(long srcUid, long dstUid) {
+        mainRepository.deleteInvitation(srcUid, dstUid);
+    }
 }

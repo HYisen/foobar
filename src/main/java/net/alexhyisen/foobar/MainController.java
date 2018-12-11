@@ -69,4 +69,9 @@ public class MainController {
     public Invitation invite(@PathVariable long srcUid, @PathVariable long dstUid, @RequestBody String message) {
         return mainService.createInvitation(srcUid, dstUid, message);
     }
+
+    @DeleteMapping("/{srcUid}/invite/{dstUid}")
+    public void invite(@PathVariable long srcUid, @PathVariable long dstUid) {
+        mainService.deleteInvitation(srcUid, dstUid);
+    }
 }
