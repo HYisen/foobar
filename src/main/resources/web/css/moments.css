@@ -1,0 +1,39 @@
+/*.moments-type {*/
+    /*background: #FFFFFF;*/
+    /*border: 1px solid #2d416d;*/
+    /*position: relative;*/
+    /*width: 880px;*/
+    /*height: 1080px;*/
+    /*margin: 0 0 0 200px;*/
+    /*padding: 50px 30px 0 30px;*/
+    /*text-align: left;*/
+/*}*/
+
+html,body,div{
+    height:100%;
+    width: 100%;
+}
+
+#momentstype1{
+    float:left;
+    height: 100%;
+    width: 20%;
+    background-color: aquamarine;
+    margin: 0;
+}
+
+#momentstype2{
+    float:left;
+    height: 100%;
+    width:60%;
+    background-color: blanchedalmond;
+    margin: 0;
+}
+
+#momentstype3{
+    float:left;
+    height: 100%;
+    width:20%;
+    background-color: honeydew;
+    margin: 0;
+}
