@@ -13,24 +13,32 @@
     </script>
 </head>
 <body onload="loadMoreMoments()">
-<button onclick="showMoments()">refresh</button>
-<p id="momentContainer"/>
-<script language="JavaScript">
-    window.onscroll = function () {
-        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
-        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
-            synch = false;
-            loadMoreMoments();
-        }
-    };
-    window.onresize = function () {
-        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
-        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
-            synch = false;
-            loadMoreMoments();
-        }
-    };
-</script>
+<div id="momentstype1">
+    <p>
+        <button onclick="showMoments()">refresh</button>
+    </p>
+</div>
+
+<div id = "momentstype2">
+    <p id="momentContainer">
+        <script language="JavaScript">
+            window.onscroll = function () {
+                //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+                if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+                    synch = false;
+                    loadMoreMoments();
+                }
+            };
+            window.onresize = function () {
+                //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+                if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+                    synch = false;
+                    loadMoreMoments();
+                }
+            };
+        </script>
+    </p>
+</div>
 <script type="text/javascript" src="js/moments.js"></script>
 <script type="text/javascript" src="js/windowUtil.js"></script>
 </body>
