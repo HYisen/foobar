@@ -14,7 +14,7 @@ html,body,div{
     width: 100%;
 }
 
-#momentstype1{
+#moments_column_1{
     float:left;
     height: 100%;
     width: 20%;
@@ -22,7 +22,7 @@ html,body,div{
     margin: 0;
 }
 
-#momentstype2{
+#moments_column_2{
     float:left;
     height: 100%;
     width:60%;
@@ -30,10 +30,25 @@ html,body,div{
     margin: 0;
 }
 
-#momentstype3{
+#moments_column_3{
     float:left;
     height: 100%;
-    width:20%;
+    width: 20%;
     background-color: honeydew;
     margin: 0;
+}
+
+.column_1_button{
+    height: 40px;
+    width: 100%;
+    background-color: floralwhite;
+}
+
+.column_1_button:hover {
+    background-color: green;
+}
+
+#time{
+    background-color: aqua;
+    width: 100%;
 }
