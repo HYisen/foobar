@@ -28,14 +28,8 @@ function showMoments() {
                 let temp = document.createElement("p");
                 temp.innerText = json[i].timestamp + "," + json[i].person.nickname + "," + json[i].paper.title;
                 titleTR.append(temp);
-                // temp = document.createElement("p");
-                // temp.innerText = json[i].person.nickname;
-                // titleTR.append(temp);
-                // temp = document.createElement("p");
-                // temp.innerText = json[i].paper.title;
-                // titleTR.append(temp);
-                let contantTR = document.createElement("p");
-                temp = document.createElement("h3");
+                let contantTR = document.createElement("h2");
+                temp = document.createElement("p");
                 temp.innerText = json[i].paper.content;
                 contantTR.append(temp);
                 oneContainer.append(titleTR);
@@ -74,18 +68,12 @@ function loadMoreMoments() {
                 container.appendChild(endContainer);
             }
             for (let i in json) {
-                let oneContainer = document.createElement("section");
+                let oneContainer = document.createElement("form");
                 let titleTR = document.createElement("p");
                 let temp = document.createElement("p");
                 temp.innerText = json[i].timestamp + "," + json[i].person.nickname + "," + json[i].paper.title;
                 titleTR.append(temp);
-                // temp = document.createElement("p");
-                // temp.innerText = json[i].person.nickname ;
-                // titleTR.append(temp);
-                // temp = document.createElement("p");
-                // temp.innerText = json[i].paper.title ;
-                // titleTR.append(temp);
-                let contantTR = document.createElement("h3");
+                let contantTR = document.createElement("h2");
                 temp = document.createElement("p");
                 temp.innerText = json[i].paper.content;
                 contantTR.append(temp);
