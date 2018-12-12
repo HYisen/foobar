@@ -88,4 +88,9 @@ public class MainController {
                                                     @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findExportInvitations(uid, skip, limit);
     }
+
+    @PostMapping("/{invitationDstUid}/accept/{invitationSrcUid}")
+    public void acceptInvitation(@PathVariable long invitationSrcUid, @PathVariable long invitationDstUid) {
+        mainService.acceptInvitation(invitationSrcUid, invitationDstUid);
+    }
 }
