@@ -102,4 +102,9 @@ public class MainService {
     public void acceptInvitation(long invitationSrcUid, long invitationDstUid) {
         mainRepository.acceptInvitation(invitationSrcUid, invitationDstUid);
     }
+
+    @Transactional()
+    public void breakFriendship(long srcUid, long dstUid) {
+        mainRepository.breakFriendship(srcUid, dstUid);
+    }
 }

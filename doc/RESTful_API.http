@@ -94,3 +94,8 @@ POST http://localhost:8080/10000/accept/10005
 Content-Type: application/json
 
 ###
+
+DELETE http://localhost:8080/10005/friend/10000
+Content-Type: application/json
+
+###

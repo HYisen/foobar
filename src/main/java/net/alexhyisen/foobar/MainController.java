@@ -93,4 +93,9 @@ public class MainController {
     public void acceptInvitation(@PathVariable long invitationSrcUid, @PathVariable long invitationDstUid) {
         mainService.acceptInvitation(invitationSrcUid, invitationDstUid);
     }
+
+    @DeleteMapping("/{srcUid}/friend/{dstUid}")
+    public void breakFriendship(@PathVariable long srcUid, @PathVariable long dstUid) {
+        mainService.breakFriendship(srcUid, dstUid);
+    }
 }
