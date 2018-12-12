@@ -69,4 +69,18 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
             @Param("timestamp") long timestamp,
             @Param("message") String message
     );
+
+    @Query("MATCH (src:Person {uid: {srcUid}})-[r:INVITE]->(dst:Person {uid: {dstUid}}) DELETE r")
+    void deleteInvitation(
+            @Param("srcUid") long srcUid,
+            @Param("dstUid") long dstUid
+    );
+
+    @Query("MATCH (src:Person)-[r:INVITE]->(dst:Person {uid: {uid}}) RETURN src,r,dst " +
+            "ORDER BY r.timestamp DESC SKIP {s} LIMIT {l};")
+    Collection<Invitation> findImportInvitations(@Param("uid") long uid, @Param("s") Long skip, @Param("l") Long limit);
+
+    @Query("MATCH (src:Person {uid: {uid}})-[r:INVITE]->(dst:Person) RETURN src,r,dst " +
+            "ORDER BY r.timestamp DESC SKIP {s} LIMIT {l};")
+    Collection<Invitation> findExportInvitations(@Param("uid") long uid, @Param("s") Long skip, @Param("l") Long limit);
 }

@@ -83,4 +83,18 @@ public class MainService {
         return mainRepository.createInvitation(srcUid, dstUid, genTimestamp(), message);
     }
 
+    @Transactional()
+    public void deleteInvitation(long srcUid, long dstUid) {
+        mainRepository.deleteInvitation(srcUid, dstUid);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<Invitation> findImportInvitations(long uid, long skip, long limit) {
+        return mainRepository.findImportInvitations(uid, skip, limit);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<Invitation> findExportInvitations(long uid, long skip, long limit) {
+        return mainRepository.findExportInvitations(uid, skip, limit);
+    }
 }
