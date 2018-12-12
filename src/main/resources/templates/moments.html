@@ -12,17 +12,21 @@
         setTimeout("showMoments()", 60000);
     </script>
 </head>
+
 <body onload="loadMoreMoments()">
-<div id="momentstype1">
-    <p>
-        <button onclick="showMoments()">refresh</button>
-    </p>
+<div id="moments_column_1">
+	<button onclick="showMoments()" class="column_1_button">refresh</button>
 </div>
 
-<div id="momentstype2">
+<div id="moments_column_2">
     <div id="momentContainer">
     </div>
 </div>
+
+<div id="moments_column_3">
+
+</div>
+
 
 <script language="JavaScript">
     window.onscroll = function () {
@@ -40,9 +44,6 @@
         }
     };
 </script>
-<div id="momentstype3">
-
-</div>
 <script type="text/javascript" src="js/moments.js"></script>
 <script type="text/javascript" src="js/windowUtil.js"></script>
 </body>
