@@ -37,7 +37,7 @@ function showMoments() {
 
                 let content = document.createElement("div");
                 content.class = "content";
-                content.innerHtml = json[i].paper.content;
+                content.innerHTML = json[i].paper.content;
 
                 let oneContainer = document.createElement("form");
                 oneContainer.append(time);
@@ -93,7 +93,7 @@ function loadMoreMoments() {
 
                 let content = document.createElement("div");
                 content.class = "content";
-                content.innerHtml = json[i].paper.content;
+                content.innerHTML = json[i].paper.content;
 
                 let oneContainer = document.createElement("form");
                 oneContainer.append(time);
