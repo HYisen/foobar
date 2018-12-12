@@ -97,4 +97,14 @@ public class MainService {
     public Collection<Invitation> findExportInvitations(long uid, long skip, long limit) {
         return mainRepository.findExportInvitations(uid, skip, limit);
     }
+
+    @Transactional()
+    public void acceptInvitation(long invitationSrcUid, long invitationDstUid) {
+        mainRepository.acceptInvitation(invitationSrcUid, invitationDstUid);
+    }
+
+    @Transactional()
+    public void breakFriendship(long srcUid, long dstUid) {
+        mainRepository.breakFriendship(srcUid, dstUid);
+    }
 }

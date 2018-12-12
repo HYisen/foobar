@@ -79,7 +79,6 @@ Content-Type: application/json
 
 ###
 
-
 GET http://localhost:8080/10005/invite/export
 Content-Type: application/json
 
@@ -87,6 +86,16 @@ Content-Type: application/json
 
 
 GET http://localhost:8080/10000/invite/import
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/10000/accept/10005
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/10005/friend/10000
 Content-Type: application/json
 
 ###

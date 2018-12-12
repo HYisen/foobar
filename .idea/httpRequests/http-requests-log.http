@@ -1,3 +1,30 @@
+DELETE http://localhost:8080/10005/friend/10000
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/10000/accept/10005
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/10000/friend
+Accept: application/json
+
+<> 2018-12-12T094916.200.json
+
+###
+
+POST http://localhost:8080/10000/accept/10005
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/10000/accept/10005
+Content-Type: application/json
+
+###
+
 GET http://localhost:8080/10005/invite/export
 Content-Type: application/json
 
@@ -352,45 +379,5 @@ Accept: application/json
 
 DELETE http://localhost:8080/10000/paper/37
 Content-Type: application/json
-
-###
-
-GET http://localhost:8080/10000/paper
-Accept: application/json
-
-<> 2018-12-06T114332.200.json
-
-###
-
-POST http://localhost:8080/10000/paper
-Content-Type: application/json
-
-{
-  "title": "Brand New Paper",
-  "content": "A new HTTP Client?"
-}
-
-<> 2018-12-06T114327.200.json
-
-###
-
-GET http://localhost:8080/10003/agent/10004
-Accept: application/json
-
-<> 2018-12-06T114323.200.json
-
-###
-
-GET http://localhost:8080/10003/stranger
-Accept: application/json
-
-<> 2018-12-06T114321.200.json
-
-###
-
-GET http://localhost:8080/10001/moment
-Accept: application/json
-
-<> 2018-12-06T114315.200.json
 
 ###
