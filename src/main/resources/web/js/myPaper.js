@@ -23,17 +23,28 @@ function showMoments() {
             body.removeChild(oldContainer)
             body.append(container);
             for (let i in json) {
+                let time = document.createElement("div");
+                time.class = "time";
+                time.innerText = json[i].timestamp;
+
+                let nickname = document.createElement("div");
+                nickname.class = "nickname";
+                nickname.innerText = json[i].person.nickname;
+
+                let title = document.createElement("div");
+                title.class = "title";
+                title.innerText = json[i].paper.title;
+
+                let content = document.createElement("div");
+                content.class = "content";
+                content.innerHtml = json[i].paper.content;
+
                 let oneContainer = document.createElement("form");
-                let titleTR = document.createElement("p");
-                let temp = document.createElement("p");
-                temp.innerText = json[i].timestamp + "," + json[i].person.nickname + "," + json[i].paper.title;
-                titleTR.append(temp);
-                let contantTR = document.createElement("h2");
-                temp = document.createElement("p");
-                temp.innerText = json[i].paper.content;
-                contantTR.append(temp);
-                oneContainer.append(titleTR);
-                oneContainer.append(contantTR);
+                oneContainer.append(time);
+                oneContainer.append(nickname);
+                oneContainer.append(title);
+                oneContainer.append(content);
+
                 container.append(oneContainer);
             }
             end = false;
@@ -68,17 +79,28 @@ function loadMoreMoments() {
                 container.appendChild(endContainer);
             }
             for (let i in json) {
+                let time = document.createElement("div");
+                time.class = "time";
+                time.innerText = json[i].timestamp;
+
+                let nickname = document.createElement("div");
+                nickname.class = "nickname";
+                nickname.innerText = json[i].person.nickname;
+
+                let title = document.createElement("div");
+                title.class = "title";
+                title.innerText = json[i].paper.title;
+
+                let content = document.createElement("div");
+                content.class = "content";
+                content.innerHtml = json[i].paper.content;
+
                 let oneContainer = document.createElement("form");
-                let titleTR = document.createElement("p");
-                let temp = document.createElement("p");
-                temp.innerText = json[i].timestamp + "," + json[i].person.nickname + "," + json[i].paper.title;
-                titleTR.append(temp);
-                let contantTR = document.createElement("h2");
-                temp = document.createElement("p");
-                temp.innerText = json[i].paper.content;
-                contantTR.append(temp);
-                oneContainer.append(titleTR);
-                oneContainer.append(contantTR);
+                oneContainer.append(time);
+                oneContainer.append(nickname);
+                oneContainer.append(title);
+                oneContainer.append(content);
+
                 container.append(oneContainer);
             }
             pages++;
