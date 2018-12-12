@@ -23,23 +23,28 @@ function showMoments() {
             body.removeChild(oldContainer)
             body.append(container);
             for (let i in json) {
-                let oneContainer = document.createElement("table");
-                let titleTR = document.createElement("tr");
-                let temp = document.createElement("td");
-                temp.innerText = json[i].timestamp;
-                titleTR.append(temp);
-                temp = document.createElement("td");
-                temp.innerText = json[i].person.nickname;
-                titleTR.append(temp);
-                temp = document.createElement("td");
-                temp.innerText = json[i].paper.title;
-                titleTR.append(temp);
-                let contantTR = document.createElement("tr");
-                temp = document.createElement("td");
-                temp.innerText = json[i].paper.content;
-                contantTR.append(temp);
-                oneContainer.append(titleTR);
-                oneContainer.append(contantTR);
+                let time = document.createElement("div");
+                time.class = "time";
+                time.innerText = json[i].timestamp;
+
+                let nickname = document.createElement("div");
+                nickname.class = "nickname";
+                nickname.innerText = json[i].person.nickname;
+
+                let title = document.createElement("div");
+                title.class = "title";
+                title.innerText = json[i].paper.title;
+
+                let content = document.createElement("div");
+                content.class = "content";
+                content.innerHtml = json[i].paper.content;
+
+                let oneContainer = document.createElement("form");
+                oneContainer.append(time);
+                oneContainer.append(nickname);
+                oneContainer.append(title);
+                oneContainer.append(content);
+
                 container.append(oneContainer);
             }
             end = false;
@@ -74,23 +79,28 @@ function loadMoreMoments() {
                 container.appendChild(endContainer);
             }
             for (let i in json) {
-                let oneContainer = document.createElement("table");
-                let titleTR = document.createElement("tr");
-                let temp = document.createElement("td");
-                temp.innerText = json[i].timestamp;
-                titleTR.append(temp);
-                temp = document.createElement("td");
-                temp.innerText = json[i].person.nickname;
-                titleTR.append(temp);
-                temp = document.createElement("td");
-                temp.innerText = json[i].paper.title;
-                titleTR.append(temp);
-                let contantTR = document.createElement("tr");
-                temp = document.createElement("td");
-                temp.innerText = json[i].paper.content;
-                contantTR.append(temp);
-                oneContainer.append(titleTR);
-                oneContainer.append(contantTR);
+                let time = document.createElement("div");
+                time.class = "time";
+                time.innerText = json[i].timestamp;
+
+                let nickname = document.createElement("div");
+                nickname.class = "nickname";
+                nickname.innerText = json[i].person.nickname;
+
+                let title = document.createElement("div");
+                title.class = "title";
+                title.innerText = json[i].paper.title;
+
+                let content = document.createElement("div");
+                content.class = "content";
+                content.innerHtml = json[i].paper.content;
+
+                let oneContainer = document.createElement("form");
+                oneContainer.append(time);
+                oneContainer.append(nickname);
+                oneContainer.append(title);
+                oneContainer.append(content);
+
                 container.append(oneContainer);
             }
             pages++;
