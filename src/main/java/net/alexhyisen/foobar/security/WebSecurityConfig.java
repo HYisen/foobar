@@ -15,6 +15,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final LinkRepository linkRepository;
     @Value("${foobar.enableSecurity}")
     private boolean enableSecurity;
+    @Value("${foobar.enableCsrfProtection}")
+    private boolean enableCsrfProtection;
 
     @Autowired
     public WebSecurityConfig(LinkRepository linkRepository) {
@@ -26,10 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         if (!enableSecurity) {
             http.authorizeRequests().anyRequest().permitAll();
         }
+        if (!enableCsrfProtection) {
+            http.csrf().disable();
+        }
 
         //noinspection SpringElInspection
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/{uid}/**").access("@guard.check(authentication,#uid)")
