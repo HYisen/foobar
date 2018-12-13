@@ -1,7 +1,10 @@
 package net.alexhyisen.foobar;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 
 @Controller
 public class WebController {
@@ -16,7 +19,12 @@ public class WebController {
     }
 
     @GetMapping(path = "/moments")
-    public String moments() {
+    public String moments(Model model, Principal principal) {
+        String name = "00000";
+        if (principal != null) {
+            name = principal.getName();
+        }
+        model.addAttribute("uid", name);
         return "moments";
     }
 

@@ -38,7 +38,7 @@ html,body,div{
     margin: 0;
 }
 
-.column_1_button{
+.column_1_refresh{
     height: 40px;
     width: 90%;
     background-color: floralwhite;
@@ -76,4 +76,11 @@ html,body,div{
 .oneContainer{
     width: 90%;
     margin: 20px 5% 20px 5%;
+}
+
+#showUid{
+    height:60px;
+    width:100%;
+    margin:20px 0 20px 0;
+    background-color: aliceblue;
 }
