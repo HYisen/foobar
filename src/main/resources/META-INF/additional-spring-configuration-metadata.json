@@ -14,6 +14,11 @@
       "name": "foobar.anonymousUid",
       "type": "java.lang.String",
       "description": "The uid to pretend when user is anonymous."
+    },
+    {
+      "name": "foobar.anonymousNickname",
+      "type": "java.lang.String",
+      "description": "The nickname of the Person when user is anonymous."
     }
   ]
 }

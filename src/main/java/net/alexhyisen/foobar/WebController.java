@@ -1,5 +1,6 @@
 package net.alexhyisen.foobar;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +10,18 @@ import java.security.Principal;
 
 @Controller
 public class WebController {
-    @Value("foobar.anonymousUid")
-    String anonymousUid;
+    @Value("${foobar.anonymousUid}")
+    private String anonymousUid;
+    @Value("${foobar.anonymousNickname}")
+    private String anonymousNickname;
+
+    private MainService mainService;
+
+    @Autowired
+    public WebController(MainService mainService) {
+        this.mainService = mainService;
+    }
+
 
     @GetMapping(path = "/heaven")
     public String heaven() {
@@ -24,16 +35,25 @@ public class WebController {
 
     @GetMapping(path = "/moments")
     public String moments(Model model, Principal principal) {
-        var name = anonymousUid;
-        if (principal != null) {
-            name = principal.getName();
-        }
-        model.addAttribute("uid", name);
+        injectPerson(model, principal);
         return "moments";
     }
 
     @GetMapping(path = "/register")
     public String register() {
         return "register";
+    }
+
+    private void injectPerson(Model model, Principal principal) {
+        var uid = anonymousUid;
+        var nickname = anonymousNickname;
+        if (principal != null) {
+            uid = principal.getName();
+            final var person = mainService.findPersonByUid(Long.valueOf(uid));
+            nickname = person.getNickname();
+            assert person.getUid().toString().equals(uid);
+        }
+        model.addAttribute("uid", uid);
+        model.addAttribute("nickname", nickname);
     }
 }

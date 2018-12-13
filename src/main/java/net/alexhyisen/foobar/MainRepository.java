@@ -91,4 +91,6 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
 
     @Query("MATCH (src:Person {uid: {srcUid}})-[r:FRIEND]-(dst:Person {uid: {dstUid}}) DELETE r;")
     void breakFriendship(@Param("srcUid") long srcUid, @Param("dstUid") long dstUid);
+
+    Person findByUid(long uid);
 }
