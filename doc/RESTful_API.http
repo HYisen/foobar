@@ -5,32 +5,32 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-GET http://localhost:8080/10000/paper
+GET http://localhost:8080/api/10000/paper
 Accept: application/json
 
 ###
 
-GET http://localhost:8080/10001/friend
+GET http://localhost:8080/api/10001/friend
 Accept: application/json
 
 ###
 
-GET http://localhost:8080/10001/moment
+GET http://localhost:8080/api/10001/moment
 Accept: application/json
 
 ###
 
-GET http://localhost:8080/10003/stranger
+GET http://localhost:8080/api/10003/stranger
 Accept: application/json
 
 ###
 
-GET http://localhost:8080/10003/agent/10004
+GET http://localhost:8080/api/10003/agent/10004
 Accept: application/json
 
 ###
 
-POST http://localhost:8080/10000/paper
+POST http://localhost:8080/api/10000/paper
 Content-Type: application/json
 
 {
@@ -40,12 +40,12 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/10000/paper/4000002
+DELETE http://localhost:8080/api/10000/paper/4000002
 Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/register
+POST http://localhost:8080/api/register
 Content-Type: application/json
 
 {
@@ -56,46 +56,35 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/register
-Content-Type: application/json
-
-{
-  "username": "ct",
-  "password": "333",
-  "nickname": "Christina"
-}
-
-###
-
-POST http://localhost:8080/10005/invite/10000
+POST http://localhost:8080/api/10005/invite/10000
 Content-Type: application/json
 
 "Long time no see, old friend."
 
 ###
 
-DELETE http://localhost:8080/10005/invite/10000
+DELETE http://localhost:8080/api/10005/invite/10000
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/10005/invite/export
+GET http://localhost:8080/api/10005/invite/export
 Content-Type: application/json
 
 ###
 
 
-GET http://localhost:8080/10000/invite/import
+GET http://localhost:8080/api/10000/invite/import
 Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/10000/accept/10005
+POST http://localhost:8080/api/10000/accept/10005
 Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/10005/friend/10000
+DELETE http://localhost:8080/api/10005/friend/10000
 Content-Type: application/json
 
 ###

@@ -115,3 +115,6 @@ MATCH (p:Paper)
 RETURN p.pid AS num
   ORDER BY num DESC
   LIMIT 1;
+
+MATCH (account:Account {username: 'realDT'})-[l:LINK]->(person:Person)
+RETURN person.uid;

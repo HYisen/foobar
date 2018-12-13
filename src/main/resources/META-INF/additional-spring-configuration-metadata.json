@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "foobar.enableSecurity",
+      "type": "java.lang.Boolean",
+      "description": "If disabled, everyone is allowed to do everything at every path."
+    },
+    {
+      "name": "foobar.enableCsrfProtection",
+      "type": "java.lang.Boolean",
+      "description": "If disabled, the default csrf protection no longer works."
+    }
+  ]
+}
