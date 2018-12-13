@@ -9,6 +9,11 @@
       "name": "foobar.enableCsrfProtection",
       "type": "java.lang.Boolean",
       "description": "If disabled, the default csrf protection no longer works."
+    },
+    {
+      "name": "foobar.anonymousUid",
+      "type": "java.lang.String",
+      "description": "The uid to pretend when user is anonymous."
     }
   ]
 }

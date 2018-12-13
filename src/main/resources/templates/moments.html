@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>moments</title>
 </head>
-<body >
-<p>username:<span id = "username"></span></p>
+<body>
+<div id="showUid" th:text="${uid}"></div>
+<p>username:<span id="username"></span></p>
 <button onclick="showusername()">111</button>
 
 <script type="text/javascript" src="/js/moments.js"></script>
