@@ -10,12 +10,17 @@
         let synch = false;
         let itemInPages = 5;
         setTimeout("showMoments()", 60000);
+        async function onload(){
+            loadMoreMoments();
+            showFriends();
+        }
     </script>
 </head>
 
-<body onload="loadMoreMoments()">
+<body onload="onload()">
 <div id="moments_column_1">
-	<button onclick="showMoments()" class="column_1_button">refresh</button>
+	<button onclick="showMoments()" class="column_1_button">refreshMoments</button>
+    <button onclick="showFriends()" class="column_1_button">showFriends</button>
 </div>
 
 <div id="moments_column_2">
@@ -24,7 +29,8 @@
 </div>
 
 <div id="moments_column_3">
-
+    <div id="friendsContainer">
+    </div>
 </div>
 
 
@@ -45,7 +51,8 @@
     };
 </script>
 <script type="text/javascript" src="js/moments.js"></script>
-<script type="text/javascript" src="js/windowUtil.js"></script>
 <script type="text/javascript" src="js/utility.js"></script>
+<script type="text/javascript" src="js/windowUtil.js"></script>
+<script type="text/javascript" src="js/friendsUtil.js"></script>
 </body>
 </html>
