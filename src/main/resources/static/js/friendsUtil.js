@@ -12,7 +12,7 @@ function showFriends() {
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10001/friend?limit=10000", (text) => {
+    ajaxGet("http://localhost:8080/api/" + uid + "/friend?limit=10000", (text) => {
             console.log(text);
             let json = JSON.parse(text);
             let oldContainer = document.getElementById("friendsContainer");
