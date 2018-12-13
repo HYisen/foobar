@@ -23,10 +23,10 @@ function showFriends() {
             body.append(container);
             for (let i in json) {
                 let nickname = document.createElement("div");
-                nickname.className = "nickname";
+                nickname.className = "friends_nickname";
                 nickname.innerText = json[i].nickname;
                 let oneContainer = document.createElement("form");
-                oneContainer.className = "oneContainer"
+                oneContainer.className = "friends_oneContainer"
                 oneContainer.append(nickname);
                 container.append(oneContainer);
             }

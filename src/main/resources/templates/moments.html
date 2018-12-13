@@ -3,9 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>moments</title>
-	<link rel="stylesheet"
-	      href="css/moments.css"
-	      type="text/css"/>
+	<link rel="stylesheet" href="css/moments.css" type="text/css"/>
+	<link rel="stylesheet" href="css/friendsUtil.css" type="text/css"/>
 	<script language="JavaScript">
         let pages = 0;
         let end = false;
@@ -21,11 +20,17 @@
 
 <body onload="onload()">
 <div id="moments_column_1">
-	<div id="showUid"  th:text="${uid}"></div>
-	<!--<button onclick="???()" class="column_1_logout">logout</button>-->
-	<button onclick="showMoments()" class="column_1_refresh">refreshMoments</button>
-    <button onclick="showFriends()" class="column_1_refresh">showFriends</button>
-	<a th:href="@{/logout}">logout</a>
+
+	<div id="showUid"  th:text="${uid}" hidden>
+	</div>
+
+	<div class = "column_1_show">
+		nickname:
+		<span id="showNickname" th:text="${nickname}"></span>
+	</div>
+	<button onclick="showMoments()" class="column_1_button">refreshMoments</button>
+    <button onclick="showFriends()" class="column_1_button">showFriends</button>
+	<a th:href="@{/logout}"><button class="column_1_button">logout</button></a>
 
 </div>
 
