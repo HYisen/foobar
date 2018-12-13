@@ -1,9 +1,9 @@
-package net.alexhyisen.foobar;
+package net.alexhyisen.foobar.service;
 
+import net.alexhyisen.foobar.repository.MainRepository;
 import net.alexhyisen.foobar.module.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -92,5 +92,9 @@ public class MainService {
 
     public void breakFriendship(long srcUid, long dstUid) {
         mainRepository.breakFriendship(srcUid, dstUid);
+    }
+
+    public Person findPersonByUid(long uid) {
+        return mainRepository.findByUid(uid);
     }
 }
