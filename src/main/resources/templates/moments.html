@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>moments</title>
-    <link rel="stylesheet" href="css/moments.css" type="text/css"/>
-    <script language="JavaScript">
+	<meta charset="UTF-8">
+	<title>moments</title>
+	<link rel="stylesheet"
+	      href="css/moments.css"
+	      type="text/css"/>
+	<script language="JavaScript">
         let pages = 0;
         let end = false;
         let synch = false;
         let itemInPages = 5;
         setTimeout("showMoments()", 60000);
-    </script>
+	</script>
 </head>
 
 <body onload="loadMoreMoments()">
 <div id="moments_column_1">
-	<button onclick="showMoments()" class="column_1_button">refresh</button>
+	<div id="showUid"  th:text="${uid}"></div>
+	<!--<button onclick="???()" class="column_1_logout">logout</button>-->
+	<button onclick="showMoments()"
+	        class="column_1_refresh">refresh
+	</button>
+	<a th:href="@{/logout}">logout</a>
 </div>
 
 <div id="moments_column_2">
-    <div id="momentContainer">
-    </div>
+	<div id="momentContainer">
+	</div>
 </div>
 
 <div id="moments_column_3">
@@ -29,6 +36,7 @@
 
 
 <script language="JavaScript">
+    let uid = document.getElementById("showUid").innerText;
     window.onscroll = function () {
         //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
         if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
@@ -44,8 +52,12 @@
         }
     };
 </script>
-<script type="text/javascript" src="js/moments.js"></script>
-<script type="text/javascript" src="js/windowUtil.js"></script>
-<script type="text/javascript" src="js/utility.js"></script>
+
+<script type="text/javascript"
+        src="js/moments.js"></script>
+<script type="text/javascript"
+        src="js/windowUtil.js"></script>
+<script type="text/javascript"
+        src="js/utility.js"></script>
 </body>
 </html>

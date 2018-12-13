@@ -2,6 +2,7 @@
     console.log(msg);
 })("Hello");
 
-function getLocalTime(nS) {
-    return new Date(parseInt(nS) * 1000).toLocaleString();
-}
+let changeUid = (newUid) => {
+    console.log(uid + " -> " + newUid);
+    uid = newUid;
+};
