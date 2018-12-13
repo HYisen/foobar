@@ -14,7 +14,7 @@ function showusername()
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10000/paper",(text)=>{
+    ajaxGet("http://localhost:8080/api/10000/paper",(text)=>{
         console.log(text);
         document.getElementById("username").innerHTML = text;
     })

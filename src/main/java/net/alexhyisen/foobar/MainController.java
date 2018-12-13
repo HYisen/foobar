@@ -15,86 +15,86 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @GetMapping("/{uid}/paper")
+    @GetMapping("/api/{uid}/paper")
     public Collection<Publication> papers(@PathVariable long uid,
                                           @RequestParam(value = "skip", defaultValue = "0") long skip,
                                           @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findPublications(uid, skip, limit);
     }
 
-    @GetMapping("/{uid}/friend")
+    @GetMapping("/api/{uid}/friend")
     public Collection<Person> friends(@PathVariable long uid,
                                       @RequestParam(value = "skip", defaultValue = "0") long skip,
                                       @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findFriends(uid, skip, limit);
     }
 
-    @GetMapping("/{uid}/moment")
+    @GetMapping("/api/{uid}/moment")
     public Collection<Publication> moments(@PathVariable long uid,
                                            @RequestParam(value = "skip", defaultValue = "0") long skip,
                                            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findMoments(uid, skip, limit);
     }
 
-    @GetMapping("/{uid}/stranger")
+    @GetMapping("/api/{uid}/stranger")
     public Collection<Person> strangers(@PathVariable long uid,
                                         @RequestParam(value = "skip", defaultValue = "0") long skip,
                                         @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findStrangers(uid, skip, limit);
     }
 
-    @GetMapping("/{srcUid}/agent/{dstUid}")
+    @GetMapping("/api/{srcUid}/agent/{dstUid}")
     public Collection<Person> agents(@PathVariable long srcUid, @PathVariable long dstUid,
                                      @RequestParam(value = "skip", defaultValue = "0") long skip,
                                      @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findAgents(srcUid, dstUid, skip, limit);
     }
 
-    @PostMapping("/{uid}/paper")
+    @PostMapping("/api/{uid}/paper")
     public Publication createPaper(@PathVariable long uid, @RequestBody Paper paper) {
         return mainService.addPaper(uid, paper.getTitle(), paper.getContent());
     }
 
-    @DeleteMapping("/{uid}/paper/{pid}")
+    @DeleteMapping("/api/{uid}/paper/{pid}")
     public void removePaper(@PathVariable long uid, @PathVariable long pid) {
         mainService.delPaper(uid, pid);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/api/register")
     public Link createUser(@RequestBody RegisterInfo info) {
         return mainService.addUser(info);
     }
 
-    @PostMapping("/{srcUid}/invite/{dstUid}")
+    @PostMapping("/api/{srcUid}/invite/{dstUid}")
     public Invitation addInvitation(@PathVariable long srcUid, @PathVariable long dstUid, @RequestBody String message) {
         return mainService.createInvitation(srcUid, dstUid, message);
     }
 
-    @DeleteMapping("/{srcUid}/invite/{dstUid}")
+    @DeleteMapping("/api/{srcUid}/invite/{dstUid}")
     public void delInvitation(@PathVariable long srcUid, @PathVariable long dstUid) {
         mainService.deleteInvitation(srcUid, dstUid);
     }
 
-    @GetMapping("/{uid}/invite/import")
+    @GetMapping("/api/{uid}/invite/import")
     public Collection<Invitation> importInvitations(@PathVariable long uid,
                                                     @RequestParam(value = "skip", defaultValue = "0") long skip,
                                                     @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findImportInvitations(uid, skip, limit);
     }
 
-    @GetMapping("/{uid}/invite/export")
+    @GetMapping("/api/{uid}/invite/export")
     public Collection<Invitation> exportInvitations(@PathVariable long uid,
                                                     @RequestParam(value = "skip", defaultValue = "0") long skip,
                                                     @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findExportInvitations(uid, skip, limit);
     }
 
-    @PostMapping("/{invitationDstUid}/accept/{invitationSrcUid}")
+    @PostMapping("/api/{invitationDstUid}/accept/{invitationSrcUid}")
     public void acceptInvitation(@PathVariable long invitationSrcUid, @PathVariable long invitationDstUid) {
         mainService.acceptInvitation(invitationSrcUid, invitationDstUid);
     }
 
-    @DeleteMapping("/{srcUid}/friend/{dstUid}")
+    @DeleteMapping("/api/{srcUid}/friend/{dstUid}")
     public void breakFriendship(@PathVariable long srcUid, @PathVariable long dstUid) {
         mainService.breakFriendship(srcUid, dstUid);
     }
