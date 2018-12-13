@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
 @Data
-class Account {
+public class Account {
     @Id
     @GeneratedValue
     @JsonIgnore
