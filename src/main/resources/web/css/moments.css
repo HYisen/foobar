@@ -40,15 +40,40 @@ html,body,div{
 
 .column_1_button{
     height: 40px;
-    width: 100%;
+    width: 90%;
     background-color: floralwhite;
+    margin: 10px 5% 10px 5%;
 }
 
 .column_1_button:hover {
     background-color: green;
 }
 
-#time{
+.time{
+    float:left;
     background-color: aqua;
+    width: 40%;
+}
+
+.nickname{
+    float:left;
+    background-color: aqua;
+    width: 30%;
+}
+
+.title{
+    float:left;
+    background-color: aqua;
+    width: 30%;
+}
+
+.content{
+    font-size: x-large;
+    background-color: white;
     width: 100%;
+}
+
+.oneContainer{
+    width: 90%;
+    margin: 20px 5% 20px 5%;
 }
