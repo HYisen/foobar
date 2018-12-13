@@ -40,6 +40,8 @@ function showMoments() {
                 content.innerHTML = json[i].paper.content;
 
                 let oneContainer = document.createElement("form");
+                oneContainer.className = 'oneContainer';
+
                 oneContainer.append(time);
                 oneContainer.append(nickname);
                 oneContainer.append(title);
@@ -96,6 +98,8 @@ function loadMoreMoments() {
                 content.innerHTML = json[i].paper.content;
 
                 let oneContainer = document.createElement("form");
+                oneContainer.className = 'oneContainer';
+
                 oneContainer.append(time);
                 oneContainer.append(nickname);
                 oneContainer.append(title);
