@@ -1,5 +1,6 @@
+
 function showMoments() {
-    pages --;
+    pages--;
     console.log("BANG!");
 
     let ajaxGet = (url, callback) => {
@@ -13,7 +14,7 @@ function showMoments() {
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10002/moment?limit=" + pages * itemInPages, (text) => {
+    ajaxGet("http://localhost:8080/api/" + uid + "/moment?limit=" + pages * itemInPages, (text) => {
             console.log(text);
             let json = JSON.parse(text);
             let oldContainer = document.getElementById("momentContainer");
@@ -70,10 +71,11 @@ function loadMoreMoments() {
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/10002/moment?skip=" + pages * itemInPages + "&limit=" + itemInPages, (text) => {
+    ajaxGet("http://localhost:8080/api/" + uid + "/moment?skip=" + pages * itemInPages + "&limit=" + itemInPages, (text) => {
             console.log(text);
             let json = JSON.parse(text);
             let container = document.getElementById("momentContainer");
+
             if (json.length == 0) {
                 let endContainer = document.createElement("p");
                 endContainer.innerText = "没有更早的信息了~";
@@ -106,6 +108,7 @@ function loadMoreMoments() {
                 oneContainer.append(content);
 
                 container.append(oneContainer);
+
             }
             pages++;
             synch = true;

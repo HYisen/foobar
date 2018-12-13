@@ -38,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/{uid}/**").access("@guard.check(authentication,#uid)")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+                .formLogin().defaultSuccessUrl("/moments")
                 .and()
-                .logout().logoutSuccessUrl("/").logoutUrl("/logout");
+                .logout().logoutSuccessUrl("/login").logoutUrl("/logout");
     }
 
     @Override
