@@ -1,4 +1,4 @@
-package net.alexhyisen.foobar;
+package net.alexhyisen.foobar.repository;
 
 import net.alexhyisen.foobar.module.Invitation;
 import net.alexhyisen.foobar.module.Link;

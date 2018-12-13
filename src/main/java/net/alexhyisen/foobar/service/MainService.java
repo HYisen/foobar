@@ -1,5 +1,6 @@
-package net.alexhyisen.foobar;
+package net.alexhyisen.foobar.service;
 
+import net.alexhyisen.foobar.repository.MainRepository;
 import net.alexhyisen.foobar.module.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

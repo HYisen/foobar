@@ -1,5 +1,6 @@
-package net.alexhyisen.foobar;
+package net.alexhyisen.foobar.controller;
 
+import net.alexhyisen.foobar.service.MainService;
 import net.alexhyisen.foobar.module.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
