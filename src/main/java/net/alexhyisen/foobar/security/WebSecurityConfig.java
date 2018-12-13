@@ -35,11 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //noinspection SpringElInspection
         http
                 .authorizeRequests()
+                .antMatchers("/logout").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/{uid}/**").access("@guard.check(authentication,#uid)")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .and()
+                .logout().logoutSuccessUrl("/").logoutUrl("/logout");
     }
 
     @Override

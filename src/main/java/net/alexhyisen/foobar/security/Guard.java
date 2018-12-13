@@ -10,7 +10,13 @@ public class Guard {
         if ("anonymousUser".equals(name)) {
             return false;
         }
-        final long uidInAuth = Long.valueOf(name);
+        final long uidInAuth;
+        try {
+            uidInAuth = Long.valueOf(name);
+        } catch (NumberFormatException e) {
+            System.out.println("failed to parsed name " + name);
+            return false;
+        }
         return uidInAuth == uidInPath;
     }
 }
