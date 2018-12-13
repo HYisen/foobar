@@ -12,13 +12,13 @@
 html,body,div{
     height:100%;
     width: 100%;
+    background-color: white;
 }
 
 #moments_column_1{
     float:left;
     height: 100%;
     width: 20%;
-    background-color: aquamarine;
     margin: 0;
 }
 
@@ -26,7 +26,6 @@ html,body,div{
     float:left;
     height: 100%;
     width:60%;
-    background-color: blanchedalmond;
     margin: 0;
 }
 
@@ -34,11 +33,16 @@ html,body,div{
     float:left;
     height: 100%;
     width: 20%;
-    background-color: honeydew;
     margin: 0;
 }
 
-.column_1_refresh{
+.column_1_show{
+    height: 40px;
+    width: 90%;
+    margin: 10px 5% 10px 5%;
+}
+
+.column_1_button{
     height: 40px;
     width: 90%;
     background-color: floralwhite;
@@ -51,19 +55,16 @@ html,body,div{
 
 .time{
     float:left;
-    background-color: aqua;
     width: 40%;
 }
 
 .nickname{
     float:left;
-    background-color: aqua;
     width: 30%;
 }
 
 .title{
     float:left;
-    background-color: aqua;
     width: 30%;
 }
 
@@ -76,11 +77,14 @@ html,body,div{
 .oneContainer{
     width: 90%;
     margin: 20px 5% 20px 5%;
+    border-style: solid;
 }
 
 #showUid{
+}
+
+#showNickname{
     height:60px;
-    width:100%;
-    margin:20px 0 20px 0;
-    background-color: aliceblue;
+    width:80%;
+    margin:20px 10% 20px 10%;
 }
