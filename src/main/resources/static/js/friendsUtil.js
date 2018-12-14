@@ -28,8 +28,42 @@ function showFriends(type = 0) {
                 nickname.className = "friends_nickname";
                 nickname.innerText = json[i].nickname;
                 let oneContainer = document.createElement("form");
-                oneContainer.className = "friends_oneContainer"
+                oneContainer.className = "friends_oneContainer";
                 oneContainer.append(nickname);
+                switch (type) {
+                    case 0:
+                        let button0 = document.createElement("button");
+                        button0.type = "button";
+                        button0.className = "friends_button";
+                        button0.innerText = "see his/her paper";
+                        button0.onclick = function () {
+                            showMoments(false, true, true, json[i].uid);
+                        }
+                        oneContainer.append(button0);
+                        break;
+                    case 1:
+                        let button1 = document.createElement("button");
+                        button1.type = "button";
+                        button1.className = "friends_button";
+                        button1.innerText = "accept";
+                        oneContainer.append(button1);
+
+                        let button2 = document.createElement("button");
+                        button2.type = "button";
+                        button2.className = "friends_button";
+                        button2.innerText = "reject";
+                        oneContainer.append(button2);
+                        break;
+                    case 2:
+                        let button3 = document.createElement("button");
+                        button3.type = "button";
+                        button3.className = "friends_button";
+                        button3.innerText = "invite";
+                        oneContainer.append(button3);
+                        break;
+                }
+
+                oneContainer.tag = json[i].uid;
                 container.append(oneContainer);
             }
         }
