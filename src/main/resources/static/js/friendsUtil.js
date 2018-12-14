@@ -1,7 +1,7 @@
-function showFriends(isFriends = true) {
+function showFriends(type = 0) {
     console.log("friends!");
 
-    let url = "http://localhost:8080/api/" + uid + (isFriends ? "/friend" : "/stranger") + "?limit=10000";
+    let url = "http://localhost:8080/api/" + uid + (type == 0 ? "/friend" : type == 1 ? "/stranger" : "/invite/import") + "?limit=10000";
 
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
@@ -17,7 +17,7 @@ function showFriends(isFriends = true) {
     ajaxGet(url, (text) => {
             console.log(text);
             let json = JSON.parse(text);
-            let oldContainer = document.getElementById(isFriends?"friendsContainer":"strangersContainer");
+            let oldContainer = document.getElementById(type == 0 ? "friendsContainer" : type == 1 ? "strangersContainer" : "inviteContainer");
             let container = document.createElement("div");
             container.id = "friendsContainer";
             let body = oldContainer.parentElement;
