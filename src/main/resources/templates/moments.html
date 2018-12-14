@@ -17,7 +17,8 @@
         async function onload() {
             showMoments();
             showFriends();
-            showFriends(false);
+            showFriends(2);
+            showFriends(1);
         }
     </script>
 </head>
@@ -35,7 +36,8 @@
     <button onclick="showMoments(false,false,true)" class="column_1_button">refreshMoments</button>
     <button onclick="showMoments(false,true,true)" class="column_1_button">showMyPapers</button>
     <button onclick="showFriends()" class="column_1_button">showFriends</button>
-    <button onclick="showFriends(false)" class="column_1_button">findFriends</button>
+    <button onclick="showFriends(2)" class="column_1_button">showInvite</button>
+    <button onclick="showFriends(1)" class="column_1_button">findFriends</button>
     <a th:href="@{/logout}">
         <button class="column_1_button">logout</button>
     </a>
@@ -51,6 +53,11 @@
     <p>Friends</p>
     <div>
         <div id="friendsContainer">
+        </div>
+    </div>
+    <p>invite import</p>
+    <div>
+        <div id="inviteContainer">
         </div>
     </div>
     <p>Someone you might know</p>
