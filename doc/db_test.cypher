@@ -34,6 +34,13 @@ RETURN r.timestamp, p
   SKIP 0
   LIMIT 10;
 
+//Find one's papers with privilege check. (e.g., 10001 can while 10000 can't get 10002's paper)
+MATCH (src:Person {uid: 10001})-[:FRIEND*0..1]-(dst:Person {uid: 10002})-[r:PUBLISH]->(p:Paper)
+RETURN r.timestamp, p
+  ORDER BY r.timestamp DESC
+  SKIP 0
+  LIMIT 10;
+
 //Find friends' papers
 MATCH (a:Person {uid: 10001})-[:FRIEND]-(b)-[r:PUBLISH]->(p)
 RETURN r.timestamp, p
