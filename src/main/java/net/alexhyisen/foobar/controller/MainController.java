@@ -1,15 +1,19 @@
 package net.alexhyisen.foobar.controller;
 
-import net.alexhyisen.foobar.service.MainService;
 import net.alexhyisen.foobar.module.*;
+import net.alexhyisen.foobar.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collection;
 
 @RestController
 public class MainController {
     private final MainService mainService;
+    @Value("${foobar.anonymousUid}")
+    private String anonymousUid;
 
     @Autowired
     public MainController(MainService mainService) {
@@ -17,10 +21,12 @@ public class MainController {
     }
 
     @GetMapping("/api/{uid}/paper")
-    public Collection<Publication> papers(@PathVariable long uid,
+    public Collection<Publication> papers(Principal principal,
+                                          @PathVariable long uid,
                                           @RequestParam(value = "skip", defaultValue = "0") long skip,
                                           @RequestParam(value = "limit", defaultValue = "10") long limit) {
-        return mainService.findPublications(uid, skip, limit);
+        var name = principal == null ? anonymousUid : principal.getName();
+        return mainService.findPublications(Long.valueOf(name), uid, skip, limit);
     }
 
     @GetMapping("/api/{uid}/friend")
