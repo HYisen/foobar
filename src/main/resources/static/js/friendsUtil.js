@@ -1,5 +1,7 @@
-function showFriends() {
+function showFriends(isFriends = true) {
     console.log("friends!");
+
+    let url = "http://localhost:8080/api/" + uid + (isFriends ? "/friend" : "/stranger") + "?limit=10000";
 
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
@@ -7,15 +9,15 @@ function showFriends() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 callback(xmlhttp.responseText);
             }
-        }
+        };
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     };
 
-    ajaxGet("http://localhost:8080/api/" + uid + "/friend?limit=10000", (text) => {
+    ajaxGet(url, (text) => {
             console.log(text);
             let json = JSON.parse(text);
-            let oldContainer = document.getElementById("friendsContainer");
+            let oldContainer = document.getElementById(isFriends?"friendsContainer":"strangersContainer");
             let container = document.createElement("div");
             container.id = "friendsContainer";
             let body = oldContainer.parentElement;
