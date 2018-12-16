@@ -38,20 +38,35 @@ function showFriends(type = 0) {
                         button0.innerText = "see his/her paper";
                         button0.onclick = function () {
                             showMoments(false, true, true, json[i].uid);
-                        }
+                        };
                         oneContainer.append(button0);
+
+                        let button4 = document.createElement("button");
+                        button4.type = "button";
+                        button4.className = "friends_button";
+                        button4.innerText = "break off";
+                        button4.onclick = function () {
+                            postFriendsRequest(4, json[i].uid);
+                        };
+                        oneContainer.append(button4);
                         break;
                     case 1:
                         let button1 = document.createElement("button");
                         button1.type = "button";
                         button1.className = "friends_button";
                         button1.innerText = "accept";
+                        button1.onclick = function () {
+                            postFriendsRequest(2, json[i].uid);
+                        };
                         oneContainer.append(button1);
 
                         let button2 = document.createElement("button");
                         button2.type = "button";
                         button2.className = "friends_button";
                         button2.innerText = "reject";
+                        button2.onclick = function () {
+                            postFriendsRequest(3, json[i].uid);
+                        };
                         oneContainer.append(button2);
                         break;
                     case 2:
@@ -59,13 +74,46 @@ function showFriends(type = 0) {
                         button3.type = "button";
                         button3.className = "friends_button";
                         button3.innerText = "invite";
+                        button3.onclick = function () {
+                            postFriendsRequest(0, json[i].uid);
+                        };
                         oneContainer.append(button3);
                         break;
                 }
+                ;
 
                 oneContainer.tag = json[i].uid;
                 container.append(oneContainer);
             }
+        }
+    )
+}
+
+function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invite;2 for reject;3 for accept;4 for break off;
+    console.log("invite!");
+
+    let url;
+    if (type == 2)
+        utl = "http://localhost:8080/api/" + dstUid + "/invite/" + uid;
+    else
+        url = "http://localhost:8080/api/" + uid + (type == 3 ? "/accept/" : type == 4 ? "/friend/" : "/invite/") + dstUid;
+
+    let ajaxGet = (url, callback) => {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                callback(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open(type % 2 == 1 ? "POST" : "DELETE", url, true);
+        xmlhttp.send();
+    };
+
+    ajaxGet(url, (text) => {
+            console.log(text);
+            showFriends();
+            showFriends(1);
+            showFriends(2);
         }
     )
 }

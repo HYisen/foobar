@@ -75,7 +75,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
             }
             if (!end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
                 synch = false;
-                showMoments(true, isFocus);
+                showMoments(true, isFocus,false,focusID);
             }
         }
     )
