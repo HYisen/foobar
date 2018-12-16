@@ -1,0 +1,115 @@
+/*.moments-type {*/
+    /*background: #FFFFFF;*/
+    /*border: 1px solid #2d416d;*/
+    /*position: relative;*/
+    /*width: 880px;*/
+    /*height: 1080px;*/
+    /*margin: 0 0 0 200px;*/
+    /*padding: 50px 30px 0 30px;*/
+    /*text-align: left;*/
+/*}*/
+
+html,body,div{
+    width: 100%;
+    background-color: white;
+}
+
+#moments_column_1{
+    float:left;
+    height: 100%;
+    width: 20%;
+}
+
+#moments_column_2{
+    float:left;
+    height: 100%;
+    width:60%;
+}
+
+#moments_column_3{
+    float:left;
+    height: 100%;
+    width: 20%;
+}
+
+.column_1_show{
+    height: 40px;
+    width: 90%;
+    margin: 10px 5% 10px 5%;
+}
+
+.column_1_button{
+    height: 40px;
+    width: 90%;
+    background-color: floralwhite;
+    margin: 10px 5% 10px 5%;
+}
+
+.column_1_button:hover {
+    background-color: green;
+}
+
+.time{
+    float:left;
+    width: 40%;
+}
+
+.nickname{
+    float:left;
+    width: 30%;
+}
+
+.title{
+    float:left;
+    width: 30%;
+}
+
+.content{
+    font-size: x-large;
+    background-color: white;
+    width: 100%;
+}
+
+.oneContainer{
+    width: 90%;
+    margin: 20px 5% 20px 5%;
+    border-style: solid;
+}
+
+#showUid{
+}
+
+#showNickname{
+    height:60px;
+    width:80%;
+    margin:20px 10% 20px 10%;
+}
+
+#column_3_1{
+    height:40px;
+    width:80%;
+    margin:10px 10% 10px 10%;
+}
+
+#column_3_2{
+    height:60px;
+    width:80%;
+    margin:10px 10% 10px 10%;
+}
+#column_3_3{
+    height:60px;
+    width:80%;
+    margin:10px 10% 10px 10%;
+}
+
+#column_3_div1{
+
+}
+
+#column_3_div2{
+
+}
+
+#column_3_div3{
+
+}

@@ -16,4 +16,5 @@ public class Paper {
     private Long pid;
     private String title;
     private String content;
+
 }

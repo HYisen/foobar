@@ -3,13 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>moments</title>
-</head>
-<body>
-<div id="uid" th:text="${uid}"></div>
-<div id="nickname" th:text="${nickname}"></div>
-<p>username:<span id="username"></span></p>
-<button onclick="showusername()">111</button>
+    <link rel="stylesheet" href="css/moments.css" type="text/css"/>
+    <link rel="stylesheet" href="css/friendsUtil.css" type="text/css"/>
+    <script language="JavaScript">
+        let pages = 1;
+        let end = false;
+        let synch = false;
+        let itemInPages = 2;
+        let lastIsFocus = true;
+        let lastFocusID;
+        setInterval("if(!lastIsFocus)showMoments()", 60000);
 
-<script type="text/javascript" src="/js/moments.js"></script>
+        async function onload() {
+            showMoments();
+            showFriends();
+            showFriends(2);
+            showFriends(1);
+        }
+    </script>
+</head>
+
+<body onload="onload()">
+<div id="moments_column_1">
+
+    <div id="showUid" th:text="${uid}" hidden>
+    </div>
+
+    <div class="column_1_show">
+        nickname:
+        <span id="showNickname" th:text="${nickname}"></span>
+    </div>
+    <button onclick="showMoments(false,false,true)" class="column_1_button">refreshMoments</button>
+    <button onclick="showMoments(false,true,true)" class="column_1_button">showMyPapers</button>
+    <button onclick="showFriends()" class="column_1_button">showFriends</button>
+    <button onclick="showFriends(2)" class="column_1_button">showInvite</button>
+    <button onclick="showFriends(1)" class="column_1_button">findFriends</button>
+    <a th:href="@{/logout}">
+        <button class="column_1_button">logout</button>
+    </a>
+
+</div>
+
+<div id="moments_column_2">
+    <div id="momentContainer">
+    </div>
+</div>
+
+<div id="moments_column_3">
+    <p id = "column_3_1">Friends</p>
+    <div id = "column_3_div1">
+        <div id="friendsContainer">
+        </div>
+    </div>
+    <p id = "column_3_2">invite import</p>
+    <div id = "column_3_div2">
+        <div id="inviteContainer">
+        </div>
+    </div>
+    <p id = "column_3_3">Someone you might know</p>
+    <div id = "column_3_div3">
+        <div id="strangersContainer">
+        </div>
+    </div>
+</div>
+
+
+<script language="JavaScript">
+    let uid = document.getElementById("showUid").innerText;
+    window.onscroll = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            synch = false;
+            showMoments(true,lastIsFocus,false,lastFocusID);
+        }
+    };
+    window.onresize = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            synch = false;
+            showMoments(true,lastIsFocus,false,lastFocusID);
+        }
+    };
+</script>
+<script type="text/javascript" src="js/moments.js"></script>
+<script type="text/javascript" src="js/utility.js"></script>
+<script type="text/javascript" src="js/windowUtil.js"></script>
+<script type="text/javascript" src="js/friendsUtil.js"></script>
 </body>
 </html>

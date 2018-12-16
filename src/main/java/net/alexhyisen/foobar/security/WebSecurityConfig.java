@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().defaultSuccessUrl("/moments")
                 .and()
-                .logout().logoutSuccessUrl("/").logoutUrl("/logout");
+                .logout().logoutSuccessUrl("/login").logoutUrl("/logout");
     }
 
     @Override
