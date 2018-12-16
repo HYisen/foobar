@@ -35,7 +35,7 @@ function showFriends(type = 0) {
                         let button0 = document.createElement("button");
                         button0.type = "button";
                         button0.className = "friends_button";
-                        button0.innerText = "see his/her paper";
+                        button0.innerText = "see paper";
                         button0.onclick = function () {
                             showMoments(false, true, true, json[i].uid);
                         };
@@ -80,7 +80,6 @@ function showFriends(type = 0) {
                         oneContainer.append(button3);
                         break;
                 }
-                ;
 
                 oneContainer.tag = json[i].uid;
                 container.append(oneContainer);
@@ -119,4 +118,12 @@ function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invi
             showFriends(2);
         }
     )
+}
+
+function my_Invite()
+{
+    let oUserid = document.getElementById("invite_form_uid");
+    console.log(oUserid.value);
+    postFriendsRequest(1, oUserid.value);
+
 }

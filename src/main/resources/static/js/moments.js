@@ -80,3 +80,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
         }
     )
 }
+
+function post_paper(){
+
+}
