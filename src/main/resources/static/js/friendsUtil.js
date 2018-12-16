@@ -19,14 +19,14 @@ function showFriends(type = 0) {
             let json = JSON.parse(text);
             let oldContainer = document.getElementById(type == 0 ? "friendsContainer" : type == 1 ? "strangersContainer" : "inviteContainer");
             let container = document.createElement("div");
-            container.id = "friendsContainer";
+            container.id = type == 0 ? "friendsContainer" : type == 1 ? "strangersContainer" : "inviteContainer";
             let body = oldContainer.parentElement;
             body.removeChild(oldContainer);
             body.append(container);
             for (let i in json) {
                 let nickname = document.createElement("div");
                 nickname.className = "friends_nickname";
-                nickname.innerText = json[i].nickname;
+                nickname.innerText = type == 2 ? json[i].src.nickname : json[i].nickname;
                 let oneContainer = document.createElement("form");
                 oneContainer.className = "friends_oneContainer";
                 oneContainer.append(nickname);
@@ -50,13 +50,13 @@ function showFriends(type = 0) {
                         };
                         oneContainer.append(button4);
                         break;
-                    case 1:
+                    case 2:
                         let button1 = document.createElement("button");
                         button1.type = "button";
                         button1.className = "friends_button";
                         button1.innerText = "accept";
                         button1.onclick = function () {
-                            postFriendsRequest(2, json[i].uid);
+                            postFriendsRequest(3, json[i].src.uid);
                         };
                         oneContainer.append(button1);
 
@@ -65,17 +65,17 @@ function showFriends(type = 0) {
                         button2.className = "friends_button";
                         button2.innerText = "reject";
                         button2.onclick = function () {
-                            postFriendsRequest(3, json[i].uid);
+                            postFriendsRequest(2, json[i].src.uid);
                         };
                         oneContainer.append(button2);
                         break;
-                    case 2:
+                    case 1:
                         let button3 = document.createElement("button");
                         button3.type = "button";
                         button3.className = "friends_button";
                         button3.innerText = "invite";
                         button3.onclick = function () {
-                            postFriendsRequest(0, json[i].uid);
+                            postFriendsRequest(1, json[i].uid);
                         };
                         oneContainer.append(button3);
                         break;
@@ -94,7 +94,7 @@ function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invi
 
     let url;
     if (type == 2)
-        utl = "http://localhost:8080/api/" + dstUid + "/invite/" + uid;
+        url = "http://localhost:8080/api/" + dstUid + "/invite/" + uid;
     else
         url = "http://localhost:8080/api/" + uid + (type == 3 ? "/accept/" : type == 4 ? "/friend/" : "/invite/") + dstUid;
 
@@ -106,7 +106,10 @@ function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invi
             }
         };
         xmlhttp.open(type % 2 == 1 ? "POST" : "DELETE", url, true);
-        xmlhttp.send();
+        if (type == 1)
+            xmlhttp.send("message=");
+        else
+            xmlhttp.send();
     };
 
     ajaxGet(url, (text) => {
