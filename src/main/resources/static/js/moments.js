@@ -8,7 +8,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
     if (!isFocus) focusID = uid;
     console.log("BANG!");
     lastFocusID = focusID;
-    
+
     let url = "http://localhost:8080/api/" + focusID + (isFocus ? "/paper" : "/moment") + "?limit=" + (isUpdate ? itemInPages + "&skip=" : "") + pages * itemInPages;
 
     console.log(url);
@@ -75,12 +75,61 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
             }
             if (!end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
                 synch = false;
-                showMoments(true, isFocus,false,focusID);
+                showMoments(true, isFocus, false, focusID);
             }
         }
     )
 }
 
-function post_paper(){
+function post_paper() {
+    console.log("hei");
+
+    let post_title = document.getElementById("paper_form_title").value;
+    let post_content = document.getElementById("paper_form_content").value;
+    let paper = {
+        "title":post_title,
+        "content":post_content
+    };
+
+    let url = "http://localhost:8080/api/" + uid + "/paper";
+    console.log(url);
+    let ajaxGet = (url, callback) => {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                callback(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("CONTENT-TYPE", "application/json;charset=UTF-8");
+        xmlhttp.send(JSON.stringify(paper));
+    };
+
+    ajaxGet(url, (text) => {
+            // let json = JSON.parse(text);
+            // json.unshift({
+            //     "timestamp": 1544031003374,
+            //     "person": {"uid": 10003, "nickname": "Elder the Frog"},
+            //     "paper": {"pid": 400006, "title": "claim", "content": "I'm not died until you die."}
+            // });
+            // console.log(json);
+            //
+            // let temp = document.createElement("form");
+            // temp.action = url;
+            // temp.method = "post";
+            // temp.style.display = "none";
+            //
+            // for (let x in json) {
+            //     let opt = document.createElement("textarea");
+            //     opt.name = x;
+            //     opt.value = json[x];
+            //     temp.appendChild(opt);
+            // }
+            // document.body.appendChild(temp);
+            //
+            // temp.submit();
+        }
+    )
+
 
 }

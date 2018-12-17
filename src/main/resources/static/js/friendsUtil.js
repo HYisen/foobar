@@ -120,8 +120,7 @@ function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invi
     )
 }
 
-function my_Invite()
-{
+function my_Invite() {
     let oUserid = document.getElementById("invite_form_uid");
     console.log(oUserid.value);
     postFriendsRequest(1, oUserid.value);
