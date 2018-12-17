@@ -116,6 +116,7 @@ function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invi
             showFriends();
             showFriends(1);
             showFriends(2);
+            showMoments(false, lastIsFocus, true, lastFocusID);
         }
     )
 }

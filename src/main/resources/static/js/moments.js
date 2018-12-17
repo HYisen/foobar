@@ -43,30 +43,39 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
                 container.appendChild(endContainer);
             }
             for (let i in json) {
+                let oneContainer = document.createElement("form");
+                oneContainer.className = 'oneContainer';
+
                 let time = document.createElement("div");
                 time.className = "time";
                 time.innerText = getLocalTime(json[i].timestamp / 1000);
+                oneContainer.append(time);
 
                 let nickname = document.createElement("div");
                 nickname.className = "nickname";
                 nickname.innerText = json[i].person.nickname;
+                oneContainer.append(nickname);
 
                 let title = document.createElement("div");
                 title.className = "title";
                 title.innerText = json[i].paper.title;
+                oneContainer.append(title);
 
                 let content = document.createElement("div");
                 content.className = "content";
                 content.innerHTML = json[i].paper.content;
-
-                let oneContainer = document.createElement("form");
-                oneContainer.className = 'oneContainer';
-
-                oneContainer.append(time);
-                oneContainer.append(nickname);
-                oneContainer.append(title);
                 oneContainer.append(content);
 
+                if (uid == json[i].person.uid) {
+                    let delButton = document.createElement("button")
+                    delButton.type = "button";
+                    delButton.className = "delete_button";
+                    delButton.innerText = "delete";
+                    delButton.onclick = function () {
+                        deletePaper(uid, json[i].paper.pid);
+                    };
+                    oneContainer.append(delButton);
+                }
                 container.append(oneContainer);
             }
             synch = true;
@@ -87,8 +96,8 @@ function post_paper() {
     let post_title = document.getElementById("paper_form_title").value;
     let post_content = document.getElementById("paper_form_content").value;
     let paper = {
-        "title":post_title,
-        "content":post_content
+        "title": post_title,
+        "content": post_content
     };
 
     let url = "http://localhost:8080/api/" + uid + "/paper";
@@ -106,30 +115,29 @@ function post_paper() {
     };
 
     ajaxGet(url, (text) => {
-            // let json = JSON.parse(text);
-            // json.unshift({
-            //     "timestamp": 1544031003374,
-            //     "person": {"uid": 10003, "nickname": "Elder the Frog"},
-            //     "paper": {"pid": 400006, "title": "claim", "content": "I'm not died until you die."}
-            // });
-            // console.log(json);
-            //
-            // let temp = document.createElement("form");
-            // temp.action = url;
-            // temp.method = "post";
-            // temp.style.display = "none";
-            //
-            // for (let x in json) {
-            //     let opt = document.createElement("textarea");
-            //     opt.name = x;
-            //     opt.value = json[x];
-            //     temp.appendChild(opt);
-            // }
-            // document.body.appendChild(temp);
-            //
-            // temp.submit();
+            showMoments(false, lastIsFocus, true, lastFocusID);
         }
     )
+}
 
+function deletePaper(uid, pid) {
+    console.log("delete");
 
+    let url = "http://localhost:8080/api/" + uid + "/paper/" + pid;
+    console.log(url);
+    let ajaxGet = (url, callback) => {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                callback(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("DELETE", url, true);
+        xmlhttp.send();
+    };
+
+    ajaxGet(url, (text) => {
+            showMoments(false, lastIsFocus, true, lastFocusID);
+        }
+    )
 }
