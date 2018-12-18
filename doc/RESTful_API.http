@@ -62,8 +62,18 @@ Content-Type: application/json
 "Long time no see, old friend."
 
 ###
-
+#Deprecated, use /api/{srcUid}/invite/export/{dstUid} instead.
 DELETE http://localhost:8080/api/10005/invite/10000
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/api/10005/invite/export/10000
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/api/10000/invite/import/10005
 Content-Type: application/json
 
 ###
@@ -72,7 +82,6 @@ GET http://localhost:8080/api/10005/invite/export
 Content-Type: application/json
 
 ###
-
 
 GET http://localhost:8080/api/10000/invite/import
 Content-Type: application/json

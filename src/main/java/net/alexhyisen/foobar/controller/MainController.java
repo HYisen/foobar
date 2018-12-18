@@ -78,7 +78,18 @@ public class MainController {
     }
 
     @DeleteMapping("/api/{srcUid}/invite/{dstUid}")
+    @Deprecated//use delExportInvitation() instead
     public void delInvitation(@PathVariable long srcUid, @PathVariable long dstUid) {
+        delExportInvitation(srcUid, dstUid);
+    }
+
+    @DeleteMapping("/api/{dstUid}/invite/import/{srcUid}")
+    public void delImportInvitation(@PathVariable long srcUid, @PathVariable long dstUid) {
+        mainService.deleteInvitation(srcUid, dstUid);
+    }
+
+    @DeleteMapping("/api/{srcUid}/invite/export/{dstUid}")
+    public void delExportInvitation(@PathVariable long srcUid, @PathVariable long dstUid) {
         mainService.deleteInvitation(srcUid, dstUid);
     }
 
