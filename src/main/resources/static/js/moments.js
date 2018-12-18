@@ -61,11 +61,6 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
                 title.innerText = json[i].paper.title;
                 oneContainer.append(title);
 
-                let content = document.createElement("div");
-                content.className = "content";
-                content.innerHTML = json[i].paper.content;
-                oneContainer.append(content);
-
                 if (uid == json[i].person.uid) {
                     let delButton = document.createElement("button")
                     delButton.type = "button";
@@ -76,6 +71,14 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
                     };
                     oneContainer.append(delButton);
                 }
+
+                oneContainer.append(document.createElement("br"));
+                let content = document.createElement("div");
+                content.className = "content";
+                content.innerHTML = json[i].paper.content;
+                oneContainer.append(content);
+
+
                 container.append(oneContainer);
             }
             synch = true;
@@ -95,6 +98,12 @@ function post_paper() {
 
     let post_title = document.getElementById("paper_form_title").value;
     let post_content = document.getElementById("paper_form_content").value;
+
+    if(post_title == "" || post_content == "")
+    {
+        alert("no title or content!");
+        return;
+    }
     let paper = {
         "title": post_title,
         "content": post_content
