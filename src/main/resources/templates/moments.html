@@ -55,11 +55,9 @@
 	<button onclick="showFriends(1)"
 	        class="column_1_button">refreshFindFriends
 	</button>
-	<a href="change.html">
-		<button class="column_1_button">
-			changePassword
-		</button>
-	</a>
+	<button class="column_1_button" onclick="window.location.href = 'user'">
+		changeUserInfo
+	</button>
 	<a th:href="@{/logout}">
 		<button class="column_1_button">logout</button>
 	</a>

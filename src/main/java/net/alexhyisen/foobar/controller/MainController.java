@@ -22,38 +22,38 @@ public class MainController {
 
     @GetMapping("/api/{uid}/paper")
     public Collection<Publication> papers(Principal principal,
-                                          @PathVariable long uid,
-                                          @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                          @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @PathVariable long uid,
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         var name = principal == null ? anonymousUid : principal.getName();
         return mainService.findPublications(Long.valueOf(name), uid, skip, limit);
     }
 
     @GetMapping("/api/{uid}/friend")
     public Collection<Person> friends(@PathVariable long uid,
-                                      @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                      @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findFriends(uid, skip, limit);
     }
 
     @GetMapping("/api/{uid}/moment")
     public Collection<Publication> moments(@PathVariable long uid,
-                                           @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                           @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findMoments(uid, skip, limit);
     }
 
     @GetMapping("/api/{uid}/stranger")
     public Collection<Person> strangers(@PathVariable long uid,
-                                        @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                        @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findStrangers(uid, skip, limit);
     }
 
     @GetMapping("/api/{srcUid}/agent/{dstUid}")
     public Collection<Person> agents(@PathVariable long srcUid, @PathVariable long dstUid,
-                                     @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                     @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findAgents(srcUid, dstUid, skip, limit);
     }
 
@@ -95,15 +95,15 @@ public class MainController {
 
     @GetMapping("/api/{uid}/invite/import")
     public Collection<Invitation> importInvitations(@PathVariable long uid,
-                                                    @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                                    @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findImportInvitations(uid, skip, limit);
     }
 
     @GetMapping("/api/{uid}/invite/export")
     public Collection<Invitation> exportInvitations(@PathVariable long uid,
-                                                    @RequestParam(value = "skip", defaultValue = "0") long skip,
-                                                    @RequestParam(value = "limit", defaultValue = "10") long limit) {
+            @RequestParam(value = "skip", defaultValue = "0") long skip,
+            @RequestParam(value = "limit", defaultValue = "10") long limit) {
         return mainService.findExportInvitations(uid, skip, limit);
     }
 
@@ -116,4 +116,19 @@ public class MainController {
     public void breakFriendship(@PathVariable long srcUid, @PathVariable long dstUid) {
         mainService.breakFriendship(srcUid, dstUid);
     }
+
+    @PostMapping("/api/{uid}/userinfo")
+    public boolean mysubmit(@PathVariable long uid, @RequestBody UserInfo userInfo) {
+        String nickname = userInfo.getNickname();
+        String password = userInfo.getNewPassword();
+        Long u0=null, u1=null;
+        if (!nickname.isBlank()) {
+            u0 = mainService.updateNickname(uid, userInfo.getOldPassword(), nickname);
+        }
+        if (!password.isEmpty()) {
+            u1 = mainService.updatePassword(uid, userInfo.getOldPassword(), password);
+        }
+        return u0 != null || u1 != null;
+    }
+
 }

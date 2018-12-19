@@ -3,13 +3,13 @@ html,body,div{
     background-color: white;
 }
 
-#change_column{
+#user_column{
     width:100%;
     text-align:center;
     height:100%;
 }
 
-#change_form{
+#user_form{
 }
 
 #cancel_btn{

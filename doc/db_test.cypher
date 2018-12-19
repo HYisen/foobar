@@ -125,3 +125,8 @@ RETURN p.pid AS num
 
 MATCH (account:Account {username: 'realDT'})-[l:LINK]->(person:Person)
 RETURN person.uid;
+
+
+MATCH (a:Account)-[:LINK]->(p:Person {uid: 10003})
+WHERE (a.password = "123456")
+SET a.password = "666", p.nickname = "hello";
