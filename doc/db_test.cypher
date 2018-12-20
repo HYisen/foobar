@@ -126,3 +126,8 @@ RETURN p.pid AS num
 //find uid by username
 MATCH (account:Account {username: 'realDT'})-[l:LINK]->(person:Person)
 RETURN person.uid;
+
+//update password by uid
+MATCH (a:Account)-[r:LINK]->(p:Person {uid:10002})
+SET a.password='password'
+RETURN a,r,p;

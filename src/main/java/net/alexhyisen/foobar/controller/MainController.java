@@ -1,6 +1,7 @@
 package net.alexhyisen.foobar.controller;
 
 import net.alexhyisen.foobar.module.*;
+import net.alexhyisen.foobar.security.UserService;
 import net.alexhyisen.foobar.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,12 +13,14 @@ import java.util.Collection;
 @RestController
 public class MainController {
     private final MainService mainService;
+    private final UserService userService;
     @Value("${foobar.anonymousUid}")
     private String anonymousUid;
 
     @Autowired
-    public MainController(MainService mainService) {
+    public MainController(MainService mainService, UserService userService) {
         this.mainService = mainService;
+        this.userService = userService;
     }
 
     @GetMapping("/api/{uid}/paper")
@@ -115,5 +118,10 @@ public class MainController {
     @DeleteMapping("/api/{srcUid}/friend/{dstUid}")
     public void breakFriendship(@PathVariable long srcUid, @PathVariable long dstUid) {
         mainService.breakFriendship(srcUid, dstUid);
+    }
+
+    @PostMapping("/api/{uid}/password")
+    public Link updatePassword(@PathVariable long uid, @RequestBody String password) {
+        return userService.updatePassword(uid, password);
     }
 }
