@@ -16,14 +16,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final LinkRepository linkRepository;
+    private final AdminProperties adminProperties;
     @Value("${foobar.enableSecurity}")
     private boolean enableSecurity;
     @Value("${foobar.enableCsrfProtection}")
     private boolean enableCsrfProtection;
 
     @Autowired
-    public WebSecurityConfig(LinkRepository linkRepository) {
+    public WebSecurityConfig(LinkRepository linkRepository, AdminProperties adminProperties) {
         this.linkRepository = linkRepository;
+        this.adminProperties = adminProperties;
     }
 
     @Override
@@ -38,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //noinspection SpringElInspection
         http
                 .authorizeRequests()
+                .anyRequest().hasRole("admin")
                 .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/{uid}/paper").permitAll()//Should I limit it to logined users?
                 .antMatchers("/api/{uid}/**").access("@guard.check(authentication,#uid)")
@@ -51,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(new UserService(linkRepository, passwordEncoder()))
+                .userDetailsService(new UserService(linkRepository, passwordEncoder(),adminProperties))
                 .passwordEncoder(passwordEncoder());
     }
 
