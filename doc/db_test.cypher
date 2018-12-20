@@ -127,6 +127,9 @@ RETURN p.pid AS num
 MATCH (account:Account {username: 'realDT'})-[l:LINK]->(person:Person)
 RETURN person.uid;
 
+//check account existence with given username
+MATCH (a:Account{username:'realDT'}) RETURN count(a)<>0;
+
 //update password by uid
 MATCH (a:Account)-[r:LINK]->(p:Person {uid:10002})
 SET a.password='password'

@@ -1,6 +1,7 @@
 package net.alexhyisen.foobar.service;
 
 import net.alexhyisen.foobar.module.*;
+import net.alexhyisen.foobar.repository.AccountRepository;
 import net.alexhyisen.foobar.repository.MainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,15 @@ import java.util.Collection;
 @Service
 public class MainService {
     private final MainRepository mainRepository;
+    private final AccountRepository accountRepository;
 
     private static long prevPid = 0;
     private static long prevUid = 0;
 
     @Autowired
-    public MainService(MainRepository mainRepository) {
+    public MainService(MainRepository mainRepository, AccountRepository accountRepository) {
         this.mainRepository = mainRepository;
+        this.accountRepository = accountRepository;
     }
 
     public Collection<Publication> findPublications(long srcUid, long dstUid, long skip, long limit) {
@@ -67,7 +70,12 @@ public class MainService {
     }
 
     public Link addUser(RegisterInfo info) {
-        return mainRepository.addUser(info.getUsername(), info.getPassword(), getNextUid(), info.getNickname());
+        final var username = info.getUsername();
+        if (accountRepository.existsByUsername(username)) {
+            throw new UsernameExistsException();
+        } else {
+            return mainRepository.addUser(username, info.getPassword(), getNextUid(), info.getNickname());
+        }
     }
 
     public Invitation createInvitation(long srcUid, long dstUid, String message) {
