@@ -6,36 +6,14 @@
     <link rel="stylesheet" href="/css/register.css" type="text/css" />
 </head>
 
-<body background="/picture/index1.jpg">
+<body>
 <section class="register-type">
     <h1 >Rigister</h1>
-    <br>
-    <br>
-    <form action = "#" method="get" align="right" padding="50px 80px 0 20px">
-        <p>
-            <label for="username">
-                Username:
-            </label>
-            <input type="text" id="username">
-        </p>
-
-        <p>
-            <label for="password">
-                Password:
-            </label>
-            <input type="text" id="password">
-        </p>
-        <p>
-            <label for="confirmp">
-                Confirm:
-            </label>
-            <input type="text" id="confirmp">
-        </p>
-        <br>
-        <div align="center">
-            <input type = "button" id = "submit-btn" value = "register">
-        </div>
-
+    <form action = "#" method="get">
+        <label for="username"><input type="username" id="username" required placeholder="Username"></label>
+        <label for="password"><input type="password" id="password" required placeholder="Password"></label>
+        <label for="confirmp"><input type="confirmp" id="confirmp" required placeholder="Confirm Password"></label>
+        <input type = "button" value = "register">
     </form>
 
 </section>
