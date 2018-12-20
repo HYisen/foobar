@@ -91,7 +91,11 @@ function showFriends(type = 0) {
 function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invite;2 for reject;3 for accept;4 for break off;
     console.log("invite!");
 
-    let url = "http://localhost:8080/api/" + uid + (type == 3 ? "/accept/" : type == 4 ? "/friend/" : "/invite/") + (type == 2 ? "import/" : "") + dstUid;
+    let url;
+    if (type == 2)
+        url = "http://localhost:8080/api/" + dstUid + "/invite/" + uid;
+    else
+        url = "http://localhost:8080/api/" + uid + (type == 3 ? "/accept/" : type == 4 ? "/friend/" : "/invite/") + dstUid;
 
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
