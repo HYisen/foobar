@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //noinspection SpringElInspection
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/{uid}/paper").permitAll()//Should I limit it to logined users?
                 .antMatchers("/api/{uid}/**").access("@guard.check(authentication,#uid)")
                 .anyRequest().permitAll()

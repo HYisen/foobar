@@ -123,10 +123,18 @@ RETURN p.pid AS num
   ORDER BY num DESC
   LIMIT 1;
 
+//find uid by username
 MATCH (account:Account {username: 'realDT'})-[l:LINK]->(person:Person)
+<<<<<<< HEAD
 RETURN person.uid;
 
 
 MATCH (a:Account)-[:LINK]->(p:Person {uid: 10003})
 WHERE (a.password = "123456")
 SET a.password = "666", p.nickname = "hello";
+
+//check account existence with given username
+MATCH (a:Account{username:'realDT'}) RETURN count(a)<>0;
+=======
+RETURN person.uid;
+>>>>>>> parent of 537c00f... add user.html, user.js, user.css
