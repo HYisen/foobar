@@ -40,12 +40,6 @@ public class WebController {
         return "moments";
     }
 
-    @GetMapping(path = "/user")
-    public String user(Model model, Principal principal) {
-        injectPerson(model, principal);
-        return "user";
-    }
-
     @GetMapping(path = "/register")
     public String register() {
         return "register";

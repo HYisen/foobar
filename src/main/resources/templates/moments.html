@@ -73,6 +73,7 @@
                                 </div>
                               </div>
 
+<<<<<<< HEAD
                            
                               <div class="panel panel-default">
                                 <div class="panel-heading"><h4>Friends</h4></div>
@@ -83,6 +84,111 @@
                                     </div>
                                   </div>
                               </div>
+=======
+	<div id="showUid"
+	     th:text="${uid}"
+	     hidden>
+	</div>
+
+	<div class="column_1_show">
+		nickname:
+		<span id="showNickname"
+		      th:text="${nickname}"></span>
+	</div>
+	<button onclick="showMoments(false,false,true)"
+	        class="column_1_button">refreshMoments
+	</button>
+	<button onclick="showMoments(false,true,true)"
+	        class="column_1_button">showMyPapers
+	</button>
+	<button onclick="showFriends()"
+	        class="column_1_button">refreshFriends
+	</button>
+	<button onclick="showFriends(2)"
+	        class="column_1_button">refreshInvite
+	</button>
+	<button onclick="showFriends(1)"
+	        class="column_1_button">refreshFindFriends
+	</button>
+	<a href="change.html">
+		<button class="column_1_button">
+			changePassword
+		</button>
+	</a>
+	<a th:href="@{/logout}">
+		<button class="column_1_button">logout</button>
+	</a>
+
+</div>
+
+<div id="moments_column_2">
+	<div>
+		<form id="paper_form">
+			<p id="paper_form_1">
+				<label for="paper_form_title">
+					Title:
+				</label>
+				<input type="text"
+				       id="paper_form_title">
+			</p>
+			<p>
+				<textarea type="text"
+				          id="paper_form_content"></textarea>
+			</p>
+			<p>
+				<input id="paper_button"
+				       type="button"
+				       value="submit"
+				       onclick="post_paper()">
+			</p>
+		</form>
+	</div>
+	<div>
+		<div id="momentContainer">
+		</div>
+	</div>
+</div>
+
+<div id="moments_column_3">
+	<p id="column_3_1">Friends</p>
+	<div id="column_3_div1">
+		<div id="friendsContainer">
+		</div>
+	</div>
+	<hr>
+
+	<div>
+		<form id="invite_form">
+			<p>
+				<label for="invite_form_uid">
+					UserId:
+				</label>
+				<input type="text"
+				       id="invite_form_uid">
+			</p>
+			<p>
+				<input class="friends_button"
+				       type="button"
+				       value="invite"
+				       onclick="my_Invite()">
+			</p>
+		</form>
+	</div>
+	<hr>
+
+	<p id="column_3_2">invite import</p>
+	<div id="column_3_div2">
+		<div id="inviteContainer">
+		</div>
+	</div>
+	<hr>
+	<p id="column_3_3">Someone you might know</p>
+	<div id="column_3_div3">
+		<div id="strangersContainer">
+		</div>
+	</div>
+</div>
+>>>>>>> parent of 537c00f... add user.html, user.js, user.css
 
                               <div class="panel panel-default">
                                 <div class="panel-heading"><h4>Invite Import</h4></div>

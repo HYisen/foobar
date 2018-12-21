@@ -105,15 +105,4 @@ public class MainService {
     public Person findPersonByUid(long uid) {
         return mainRepository.findByUid(uid);
     }
-
-    public Long updatePassword(long uid,String oldPassword,String newPassword) {
-        return mainRepository.updatePassword(uid,oldPassword, newPassword);
-    }
-
-    public Long updateNickname(long uid,String oldPassword,String nickname) {
-        return mainRepository.updateNickname(uid,oldPassword, nickname);
-    }
-
-
-
 }

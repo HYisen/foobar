@@ -125,6 +125,7 @@ RETURN p.pid AS num
 
 //find uid by username
 MATCH (account:Account {username: 'realDT'})-[l:LINK]->(person:Person)
+<<<<<<< HEAD
 RETURN person.uid;
 
 
@@ -134,3 +135,6 @@ SET a.password = "666", p.nickname = "hello";
 
 //check account existence with given username
 MATCH (a:Account{username:'realDT'}) RETURN count(a)<>0;
+=======
+RETURN person.uid;
+>>>>>>> parent of 537c00f... add user.html, user.js, user.css
