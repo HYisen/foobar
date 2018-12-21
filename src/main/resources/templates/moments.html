@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>moments</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/friendsUtil.css" rel="stylesheet" >
+		<link href="css/moments.css" rel="stylesheet">
+    <script language="JavaScript">
+        let pages = 1;
+        let end = false;
+        let synch = false;
+        let itemInPages = 2;
+        let lastIsFocus = true;
+        let lastFocusID;
+        setInterval("if(!lastIsFocus)showMoments()", 60000);
+
+        async function onload() {
+            showMoments();
+            showFriends();
+            showFriends(2);
+            showFriends(1);
+        }
+  </script>
+	</head>
+	<body onload="onload()">
+  <div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <!-- sidebar -->
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+                <ul class="nav hidden-xs" id="lg-menu">
+                    <li class="active"><a href="javascript:void(0);" onclick="showMoments(false, false, true)">Refresh Moments</a></li>
+                    <li><a href="javascript:void(0);" onclick="showMoments(false, true, true)">Show My Papers</a></li>
+                    <li><a href="javascript:void(0);" onclick="showFriends()">Refresh Friends</a></li>
+                    <li><a href="javascript:void(0);" onclick="showFriends(2)">Refresh Invitement</a></li>
+                    <li><a href="javascript:void(0);" onclick="showFriends(2)">Refresh Find Friends</a></li>
+                    <li><a href="javascript:void(0);">Change Password</a></li>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                </ul>    
+            </div>
+            <!-- /sidebar -->
+          
+            <!-- main right col -->
+            <div class="column col-sm-10 col-xs-11" id="main">
+                
+                <!-- top nav -->
+              	<div class="navbar navbar-blue navbar-static-top">  
+                    <div class="navbar-header">
+                      <a href="#" class="navbar-brand logo">F</a>
+                  	</div>
+                </div>
+                <!-- /top nav -->
+
+                <div class="padding">
+                    <div class="full col-sm-9">
+                      
+                        <!-- content -->                      
+                      	<div class="row">
+                          
+                         <!-- main col left --> 
+                         <div class="col-sm-5">
+                           
+                              <div class="panel panel-default">
+                                <div class="panel-body">
+                                  <p class="lead">
+                                    <div id="showUid" th:text="${uid}" hidden></div>
+                                    <span id="showNickname" th:text="${nickname}"></span>
+                                  </p>
+                                  <p>45 Friends, 13 Posts</p>
+                                </div>
+                              </div>
+
+                           
+                              <div class="panel panel-default">
+                                <div class="panel-heading"><h4>Friends</h4></div>
+                                  <div class="panel-body">
+                                    <div class="list-group">
+                                      <div id="friendsContainer" class="list-group-item">
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class="panel panel-default">
+                                <div class="panel-heading"><h4>Invite Import</h4></div>
+                                  <div class="panel-body">
+                                    <div class="list-group">
+                                      <div id="inviteContainer" class="list-group-item">
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class="panel panel-default">
+                                <div class="panel-heading"><h4>Someone You Might Know</h4></div>
+                                  <div class="panel-body">
+                                    <div class="list-group">
+                                      <div id="strangersContainer" class="list-group-item">
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                           
+                              <div class="well"> 
+                                  <form class="form" id="invite_form">
+                                    <h4>Invite New Friend</h4>
+                                    <div class="input-group text-center">
+                                    <input type="text" class="form-control input-lg" id="invite_form_uid" placeholder="Your Friend's UserID">
+                                      <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button" onclick="my_Invite()">Invite</button></span>
+                                    </div>
+                                  </form>
+                              </div>
+                          </div>
+                          
+                          <!-- main col right -->
+                          <div class="col-sm-7">
+                               
+                                <div class="well">
+                                   <form class="form-horizontal" id="paper_form" role="form">
+                                      <h4>Post New Moment</h4>
+                                        <div class="form-group" style="padding:12px;">
+                                          <input type="text" class="form-control" id = "paper_form_title" placeholder="Title:">
+                                          </br>
+                                          <textarea class="form-control" id = "paper_form_content" placeholder="You want to say..."></textarea>
+                                        </div>
+                                        <button class="btn btn-primary" type="button" onclick="post_paper()">Post</button>
+                                    </form>
+                                </div>
+                      
+                               <div class="panel panel-default">
+                                  <div class="panel-heading"><h4>Title</h4></div>
+                                  <div class="panel-body">Content</div>
+                                  <div id="momentContainer">
+                                  </div>
+                               </div>
+                          </div>
+                       </div><!--/row-->
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+        </div>
+      </div>
+    </div>
+<script language="JavaScript">
+    let uid = document.getElementById("showUid").innerText;
+    window.onscroll = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            synch = false;
+            showMoments(true, lastIsFocus, false, lastFocusID);
+        }
+    };
+    window.onresize = function () {
+        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+            synch = false;
+            showMoments(true, lastIsFocus, false, lastFocusID);
+        }
+    };
+</script>
+<!-- script references -->
+		<script type="text/javascript" src="js/moments.js"></script>
+    <script type="text/javascript" src="js/utility.js"></script>
+    <script type="text/javascript" src="js/windowUtil.js"></script>
+    <script type="text/javascript" src="js/friendsUtil.js"></script>
+	</body>
+</html>
