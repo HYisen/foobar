@@ -31,7 +31,7 @@ public class WebController {
 
     @GetMapping(path = "/index")
     public String index() {
-        return "index";
+        return "my_index";
     }
 
     @GetMapping(path = "/moments")
