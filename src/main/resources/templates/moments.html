@@ -18,7 +18,7 @@
         let lastFocusID;
         setInterval("if(!lastIsFocus)showMoments()", 60000);
 
-        async function onload() {
+        function onload() {
             showMoments();
             showFriends();
             showFriends(2);
@@ -55,7 +55,8 @@
 	<button onclick="showFriends(1)"
 	        class="column_1_button">refreshFindFriends
 	</button>
-	<button class="column_1_button" onclick="window.location.href = 'user'">
+	<button class="column_1_button"
+	        onclick="window.location.href = 'user'">
 		changeUserInfo
 	</button>
 	<a th:href="@{/logout}">
@@ -137,14 +138,14 @@
     let uid = document.getElementById("showUid").innerText;
     window.onscroll = function () {
         console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
-        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+        if (synch && !end && getDocumentTop() + getWindowHeight() + 1 > getScrollTop()) {
             synch = false;
             showMoments(true, lastIsFocus, false, lastFocusID);
         }
     };
     window.onresize = function () {
         //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
-        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+        if (synch && !end && getDocumentTop() + getWindowHeight() + 1 > getScrollTop()) {
             synch = false;
             showMoments(true, lastIsFocus, false, lastFocusID);
         }
