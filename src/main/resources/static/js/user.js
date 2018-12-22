@@ -22,8 +22,7 @@ function mySubmit() {
         "nickname": new_nickname
     };
 
-    let url = "http://localhost:8080/api/" + uid + "/userinfo";
-    console.log(url);
+    const url = "http://localhost:8080/api/{uid}/userinfo";
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {

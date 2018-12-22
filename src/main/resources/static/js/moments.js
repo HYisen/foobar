@@ -93,7 +93,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
     )
 }
 
-function post_paper() {
+function postPaper() {
     console.log("hei");
 
     let post_title = document.getElementById("paper_form_title").value;

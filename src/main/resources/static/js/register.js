@@ -28,7 +28,6 @@ function myRegister() {
     };
 
     let url = "http://localhost:8080/api/register";
-    console.log(url);
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
