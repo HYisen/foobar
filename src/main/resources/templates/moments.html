@@ -62,7 +62,6 @@
 	<a th:href="@{/logout}">
 		<button class="column_1_button">logout</button>
 	</a>
-
 </div>
 
 <div id="moments_column_2">
@@ -78,6 +77,17 @@
 			<p>
 				<textarea type="text"
 				          id="paper_form_content"></textarea>
+			</p>
+			<p>
+				<label for="pictureURL">
+					pictureURL:
+				</label>
+				<input type="text"
+				       id="pictureURL">
+				<input id="picture_button"
+				       type="button"
+				       value="insert picture"
+				       onclick="inputPicture()">
 			</p>
 			<p>
 				<input id="paper_button"

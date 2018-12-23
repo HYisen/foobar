@@ -75,7 +75,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
                 oneContainer.append(document.createElement("br"));
                 let content = document.createElement("div");
                 content.className = "content";
-                content.innerHTML = json[i].paper.content;
+                content.innerHTML = (json[i].paper.content).replace(/\n/g,"<br/>");
                 oneContainer.append(content);
 
 
@@ -149,4 +149,16 @@ function deletePaper(uid, pid) {
             showMoments(false, lastIsFocus, true, lastFocusID);
         }
     )
+}
+
+function inputPicture() {
+    let pictureURLInput = document.getElementById("pictureURL");
+    let post_content = document.getElementById("paper_form_content");
+
+    let pictureURL = pictureURLInput.value;
+
+    post_content.value = post_content.value + "<img width=20% height=20% src = \""+ pictureURL +"\">";
+
+    pictureURLInput.value = "";
+
 }
