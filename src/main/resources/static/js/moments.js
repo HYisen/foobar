@@ -78,7 +78,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
             content.innerHTML = (json[i].paper.content).replace(/</g, "&lt")
                 .replace(/>/g, "&gt")
                 .replace(/\n/g, "<br/>")
-                .replace(/&ltimg width=(\d+)% height=(\d+)%(.*)&gt/g, "<img width=$1% height=$2%$3>");
+                .replace(/&ltimg width=(\d+)% height=(\d+)% src = "(.*)"&gt/g, "<img width=$1% height=$2% src = \"$3\">");
             oneContainer.append(content);
 
 
