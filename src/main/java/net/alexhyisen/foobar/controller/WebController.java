@@ -49,6 +49,11 @@ public class WebController {
         return "register";
     }
 
+    @GetMapping(path = "/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+
     private void injectPerson(Model model, Principal principal) {
         var uid = anonymousUid;
         var nickname = anonymousNickname;

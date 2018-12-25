@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //noinspection SpringElInspection
         http
                 .authorizeRequests()
-                .anyRequest().hasRole("admin")
+                .antMatchers("/dashboard").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/{uid}/paper").permitAll()//Should I limit it to logined users?
                 .antMatchers("/api/{uid}/**").access("@guard.check(authentication,#uid)")
@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(new UserService(linkRepository, passwordEncoder(),adminProperties))
+                .userDetailsService(new UserService(linkRepository, passwordEncoder(), adminProperties))
                 .passwordEncoder(passwordEncoder());
     }
 
