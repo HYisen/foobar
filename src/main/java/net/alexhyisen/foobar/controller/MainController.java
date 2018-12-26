@@ -5,6 +5,7 @@ import net.alexhyisen.foobar.security.UserService;
 import net.alexhyisen.foobar.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -14,13 +15,15 @@ import java.util.Collection;
 public class MainController {
     private final MainService mainService;
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
     @Value("${foobar.anonymousUid}")
     private String anonymousUid;
 
     @Autowired
-    public MainController(MainService mainService, UserService userService) {
+    public MainController(MainService mainService, UserService userService, PasswordEncoder passwordEncoder) {
         this.mainService = mainService;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/api/{uid}/paper")

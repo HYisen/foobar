@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.websocket.server.PathParam;
 import java.security.Principal;
 
 @Controller
@@ -48,6 +52,11 @@ public class WebController {
     public String user(Model model, Principal principal) {
         injectPerson(model, principal);
         return "user";
+    }
+
+    @GetMapping(path = "/login")
+    public String login() {
+        return "login" ;
     }
 
     @GetMapping(path = "/register")

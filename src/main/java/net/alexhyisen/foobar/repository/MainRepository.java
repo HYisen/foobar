@@ -14,7 +14,7 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     @Query("MATCH (src:Person {uid: {srcUid}})-[:FRIEND*0..1]-(dst:Person {uid: {dstUid}})-[r:PUBLISH]->(p:Paper)" +
             " RETURN dst,r,p ORDER BY r.timestamp DESC SKIP {s} LIMIT {l};")
     Collection<Publication> findPublications(@Param("srcUid") Long srcUid, @Param("dstUid") Long dstUid,
-            @Param("s") Long skip, @Param("l") Long limit);
+                                             @Param("s") Long skip, @Param("l") Long limit);
 
     @Query("MATCH (a:Person {uid:{uid}})-[:FRIEND]-(b:Person) RETURN b ORDER BY b.uid SKIP {s} LIMIT {l};")
     Collection<Person> findFriends(@Param("uid") Long uid, @Param("s") Long skip, @Param("l") Long limit);
@@ -30,7 +30,7 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     @Query("MATCH (a:Person {uid:{srcUid}})-[:FRIEND]-(b:Person)-[:FRIEND]-(c:Person {uid:{dstUid}})" +
             " RETURN DISTINCT b ORDER BY b.uid SKIP {s} LIMIT {l};")
     Collection<Person> findAgents(@Param("srcUid") Long srcUid, @Param("dstUid") Long dstUid,
-            @Param("s") Long skip, @Param("l") Long limit);
+                                  @Param("s") Long skip, @Param("l") Long limit);
 
     @Query("MATCH (a:Person {uid:{uid}})" +
             " CREATE (a)-[r:PUBLISH {timestamp:{timestamp}}]->(p:Paper {pid:{pid},title:{title},content:{content}})" +
@@ -97,19 +97,19 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     Person findByUid(long uid);
 
     @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {srcUid}}) " +
-            "WHERE (a.password = {oldP}) SET a.password = {newP} RETURN p.uid")
+            " SET a.password = {newP} RETURN p.uid")
     Long updatePassword(
             @Param("srcUid") long uid,
-            @Param("oldP") String oldPassword,
             @Param("newP") String newPassword
     );
 
     @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {srcUid}}) " +
-            "WHERE (a.password = {oldP}) SET p.nickname = {name} RETURN p.uid")
+            " SET p.nickname = {name} RETURN p.uid")
     Long updateNickname(
             @Param("srcUid") long uid,
-            @Param("oldP") String oldPassword,
             @Param("name") String nickname
     );
 
+    @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {uid}}) RETURN a.password")
+    String findPasswordByUid(@Param("uid") long uid);
 }
