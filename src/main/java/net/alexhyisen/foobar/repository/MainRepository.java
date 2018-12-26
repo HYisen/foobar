@@ -95,4 +95,21 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     void breakFriendship(@Param("srcUid") long srcUid, @Param("dstUid") long dstUid);
 
     Person findByUid(long uid);
+
+    @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {srcUid}}) " +
+            " SET a.password = {newP} RETURN p.uid")
+    Long updatePassword(
+            @Param("srcUid") long uid,
+            @Param("newP") String newPassword
+    );
+
+    @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {srcUid}}) " +
+            " SET p.nickname = {name} RETURN p.uid")
+    Long updateNickname(
+            @Param("srcUid") long uid,
+            @Param("name") String nickname
+    );
+
+    @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {uid}}) RETURN a.password")
+    String findPasswordByUid(@Param("uid") long uid);
 }

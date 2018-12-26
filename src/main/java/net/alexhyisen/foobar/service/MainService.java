@@ -123,4 +123,14 @@ public class MainService {
     public Person findPersonByUid(long uid) {
         return mainRepository.findByUid(uid);
     }
+
+    public Long updatePassword(long uid,String oldRawPassword,String newRawPassword) {
+        assert passwordEncoder.matches(oldRawPassword, mainRepository.findPasswordByUid(uid));
+        return mainRepository.updatePassword(uid, passwordEncoder.encode(newRawPassword));
+    }
+
+    public Long updateNickname(long uid,String oldPassword,String nickname) {
+        assert passwordEncoder.matches(oldPassword, mainRepository.findPasswordByUid(uid));
+        return mainRepository.updateNickname(uid, nickname);
+    }
 }

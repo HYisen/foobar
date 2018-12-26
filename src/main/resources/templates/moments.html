@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>moments</title>
-    <link rel="stylesheet" href="css/moments.css" type="text/css"/>
-    <link rel="stylesheet" href="css/friendsUtil.css" type="text/css"/>
-    <script language="JavaScript">
+	<meta charset="UTF-8">
+	<title>moments</title>
+	<link rel="stylesheet"
+	      href="css/moments.css"
+	      type="text/css"/>
+	<link rel="stylesheet"
+	      href="css/friendsUtil.css"
+	      type="text/css"/>
+	<script language="JavaScript">
         let pages = 1;
         let end = false;
         let synch = false;
@@ -14,80 +18,156 @@
         let lastFocusID;
         setInterval("if(!lastIsFocus)showMoments()", 60000);
 
-        async function onload() {
+        function onload() {
             showMoments();
             showFriends();
             showFriends(2);
             showFriends(1);
         }
-    </script>
+	</script>
 </head>
 
 <body onload="onload()">
 <div id="moments_column_1">
 
-    <div id="showUid" th:text="${uid}" hidden>
-    </div>
+	<div id="showUid"
+	     th:text="${uid}"
+	     hidden>
+	</div>
 
-    <div class="column_1_show">
-        nickname:
-        <span id="showNickname" th:text="${nickname}"></span>
-    </div>
-    <button onclick="showMoments(false,false,true)" class="column_1_button">refreshMoments</button>
-    <button onclick="showMoments(false,true,true)" class="column_1_button">showMyPapers</button>
-    <button onclick="showFriends()" class="column_1_button">showFriends</button>
-    <button onclick="showFriends(2)" class="column_1_button">showInvite</button>
-    <button onclick="showFriends(1)" class="column_1_button">findFriends</button>
-    <a th:href="@{/logout}">
-        <button class="column_1_button">logout</button>
-    </a>
-
+	<div class="column_1_show">
+		nickname:
+		<span id="showNickname"
+		      th:text="${nickname}"></span>
+	</div>
+	<button onclick="showMoments(false,false,true)"
+	        class="column_1_button">refreshMoments
+	</button>
+	<button onclick="showMoments(false,true,true)"
+	        class="column_1_button">showMyPapers
+	</button>
+	<button onclick="showFriends()"
+	        class="column_1_button">refreshFriends
+	</button>
+	<button onclick="showFriends(2)"
+	        class="column_1_button">refreshInvite
+	</button>
+	<button onclick="showFriends(1)"
+	        class="column_1_button">refreshFindFriends
+	</button>
+	<button class="column_1_button"
+	        onclick="window.location.href = 'user'">
+		changeUserInfo
+	</button>
+	<a th:href="@{/logout}">
+		<button class="column_1_button">logout</button>
+	</a>
 </div>
 
 <div id="moments_column_2">
-    <div id="momentContainer">
-    </div>
+	<div>
+		<form id="paper_form">
+			<p id="paper_form_1">
+				<label for="paper_form_title">
+					Title:
+				</label>
+				<input type="text"
+				       id="paper_form_title">
+			</p>
+			<p>
+				<textarea type="text"
+				          id="paper_form_content"></textarea>
+			</p>
+			<p>
+				<label for="pictureURL">
+					pictureURL:
+				</label>
+				<input type="text"
+				       id="pictureURL">
+				<input id="picture_button"
+				       type="button"
+				       value="insert picture"
+				       onclick="inputPicture()">
+			</p>
+			<p>
+				<input id="paper_button"
+				       type="button"
+				       value="submit"
+				       onclick="postPaper()">
+			</p>
+		</form>
+	</div>
+	<div>
+		<div id="momentContainer">
+		</div>
+	</div>
 </div>
 
 <div id="moments_column_3">
-    <p id = "column_3_1">Friends</p>
-    <div id = "column_3_div1">
-        <div id="friendsContainer">
-        </div>
-    </div>
-    <p id = "column_3_2">invite import</p>
-    <div id = "column_3_div2">
-        <div id="inviteContainer">
-        </div>
-    </div>
-    <p id = "column_3_3">Someone you might know</p>
-    <div id = "column_3_div3">
-        <div id="strangersContainer">
-        </div>
-    </div>
+	<p id="column_3_1">Friends</p>
+	<div id="column_3_div1">
+		<div id="friendsContainer">
+		</div>
+	</div>
+	<hr>
+
+	<div>
+		<form id="invite_form">
+			<p>
+				<label for="invite_form_uid">
+					UserId:
+				</label>
+				<input type="text"
+				       id="invite_form_uid">
+			</p>
+			<p>
+				<input class="friends_button"
+				       type="button"
+				       value="invite"
+				       onclick="myInvite()">
+			</p>
+		</form>
+	</div>
+	<hr>
+
+	<p id="column_3_2">invite import</p>
+	<div id="column_3_div2">
+		<div id="inviteContainer">
+		</div>
+	</div>
+	<hr>
+	<p id="column_3_3">Someone you might know</p>
+	<div id="column_3_div3">
+		<div id="strangersContainer">
+		</div>
+	</div>
 </div>
 
 
 <script language="JavaScript">
     let uid = document.getElementById("showUid").innerText;
     window.onscroll = function () {
-        //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
-        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+        console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
+        if (synch && !end && getDocumentTop() + getWindowHeight() + 1 > getScrollTop()) {
             synch = false;
-            showMoments(true,lastIsFocus,false,lastFocusID);
+            showMoments(true, lastIsFocus, false, lastFocusID);
         }
     };
     window.onresize = function () {
         //console.log(getDocumentTop(), getWindowHeight(), getScrollTop())
-        if (synch && !end && getDocumentTop() + getWindowHeight() == getScrollTop()) {
+        if (synch && !end && getDocumentTop() + getWindowHeight() + 1 > getScrollTop()) {
             synch = false;
-            showMoments(true,lastIsFocus,false,lastFocusID);
+            showMoments(true, lastIsFocus, false, lastFocusID);
         }
     };
 </script>
-<script type="text/javascript" src="js/moments.js"></script>
-<script type="text/javascript" src="js/utility.js"></script>
-<script type="text/javascript" src="js/windowUtil.js"></script>
-<script type="text/javascript" src="js/friendsUtil.js"></script>
+<script type="text/javascript"
+        src="js/moments.js"></script>
+<script type="text/javascript"
+        src="js/utility.js"></script>
+<script type="text/javascript"
+        src="js/windowUtil.js"></script>
+<script type="text/javascript"
+        src="js/friendsUtil.js"></script>
 </body>
 </html>

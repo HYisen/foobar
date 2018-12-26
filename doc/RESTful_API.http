@@ -104,3 +104,14 @@ Content-Type: application/json
 666
 
 ###
+
+POST http://localhost:8080/api/10003/userinfo
+Content-Type: application/json
+
+{
+  "oldPassword": "666",
+  "newPassword": "zhangdeng",
+  "nickname": ""
+}
+
+###

@@ -11,7 +11,7 @@
     <h1 >Rigister</h1>
     <br>
     <br>
-    <form action = "#" method="get" align="right" padding="50px 80px 0 20px">
+    <form id = "register_form">
         <p>
             <label for="username">
                 Username:
@@ -31,14 +31,23 @@
             </label>
             <input type="text" id="confirmp">
         </p>
+        <p>
+            <label for="nickname">
+                Nickname:
+            </label>
+            <input type="text" id="nickname">
+        </p>
         <br>
-        <div align="center">
-            <input type = "button" id = "submit-btn" value = "register">
-        </div>
+        <input type="button" value="submit" id="submit-btn" onclick="myRegister()">
+        <input type="button" value="back" id="back-btn" onclick="window.location.href = 'login'">
 
     </form>
 
 </section>
 
+<script type="text/javascript"
+        src="js/register.js"></script>
+<script type="text/javascript"
+        src="js/utility.js"></script>
 </body>
 </html>

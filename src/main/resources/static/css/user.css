@@ -1,0 +1,26 @@
+html,body,div{
+    width: 100%;
+    background-color: white;
+}
+
+#user_column{
+    width:100%;
+    text-align:center;
+    height:100%;
+}
+
+#user_form{
+}
+
+#cancel_btn{
+    margin: 10px 30px 10px 30px;
+}
+
+#showUid{
+}
+
+#showNickname{
+    height:60px;
+    width:80%;
+    margin:20px 10% 20px 10%;
+}

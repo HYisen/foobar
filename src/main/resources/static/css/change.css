@@ -1,0 +1,17 @@
+html,body,div{
+    width: 100%;
+    background-color: white;
+}
+
+#change_column{
+    width:100%;
+    text-align:center;
+    height:100%;
+}
+
+#change_form{
+}
+
+#cancel_btn{
+    margin: 10px 30px 10px 30px;
+}
