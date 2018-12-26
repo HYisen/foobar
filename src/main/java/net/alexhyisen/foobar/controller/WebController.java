@@ -1,5 +1,6 @@
 package net.alexhyisen.foobar.controller;
 
+import net.alexhyisen.foobar.security.AdminProperties;
 import net.alexhyisen.foobar.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +17,14 @@ public class WebController {
     @Value("${foobar.anonymousNickname}")
     private String anonymousNickname;
 
-    private MainService mainService;
+    private final MainService mainService;
+
+    private final AdminProperties adminProperties;
 
     @Autowired
-    public WebController(MainService mainService) {
+    public WebController(MainService mainService, AdminProperties adminProperties) {
         this.mainService = mainService;
+        this.adminProperties = adminProperties;
     }
 
 
@@ -51,14 +55,23 @@ public class WebController {
         return "register";
     }
 
+    @GetMapping(path = "/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+
     private void injectPerson(Model model, Principal principal) {
         var uid = anonymousUid;
         var nickname = anonymousNickname;
         if (principal != null) {
             uid = principal.getName();
-            final var person = mainService.findPersonByUid(Long.valueOf(uid));
-            nickname = person.getNickname();
-            assert person.getUid().toString().equals(uid);
+            if (adminProperties.getUid().equals(uid)) {
+                nickname = adminProperties.getNickname();
+            } else {
+                final var person = mainService.findPersonByUid(Long.valueOf(uid));
+                nickname = person.getNickname();
+                assert person.getUid().toString().equals(uid);
+            }
         }
         model.addAttribute("uid", uid);
         model.addAttribute("nickname", nickname);

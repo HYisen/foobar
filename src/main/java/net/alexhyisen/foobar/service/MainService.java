@@ -3,7 +3,9 @@ package net.alexhyisen.foobar.service;
 import net.alexhyisen.foobar.module.*;
 import net.alexhyisen.foobar.repository.AccountRepository;
 import net.alexhyisen.foobar.repository.MainRepository;
+import net.alexhyisen.foobar.security.AdminProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -14,13 +16,24 @@ public class MainService {
     private final MainRepository mainRepository;
     private final AccountRepository accountRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
+    private final AdminProperties adminProperties;
+
     private static long prevPid = 0;
     private static long prevUid = 0;
 
     @Autowired
-    public MainService(MainRepository mainRepository, AccountRepository accountRepository) {
+    public MainService(
+            MainRepository mainRepository,
+            AccountRepository accountRepository,
+            PasswordEncoder passwordEncoder,
+            AdminProperties adminProperties
+    ) {
         this.mainRepository = mainRepository;
         this.accountRepository = accountRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.adminProperties = adminProperties;
     }
 
     public Collection<Publication> findPublications(long srcUid, long dstUid, long skip, long limit) {
@@ -71,10 +84,15 @@ public class MainService {
 
     public Link addUser(RegisterInfo info) {
         final var username = info.getUsername();
-        if (accountRepository.existsByUsername(username)) {
+        if (accountRepository.existsByUsername(username) || adminProperties.getUsername().equals(username)) {
             throw new UsernameExistsException();
         } else {
-            return mainRepository.addUser(username, info.getPassword(), getNextUid(), info.getNickname());
+            return mainRepository.addUser(
+                    username,
+                    passwordEncoder.encode(info.getPassword()),
+                    getNextUid(),
+                    info.getNickname()
+            );
         }
     }
 

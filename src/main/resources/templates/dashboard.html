@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+
+<div>
+    <h4>Destination Setup</h4>
+    <label for="uid">target uid:</label>
+    <input type="text" id="uid">
+</div>
+
+<div>
+    <h4>Change Password</h4>
+    <label for="pwd">new password:</label>
+    <input type="password" id="pwd"/>
+    <button onclick="handleChangeButtonAction()">change</button>
+</div>
+
+<div>
+    <h4>Forge Publication</h4>
+    <label for="title">title:</label><br>
+    <input type="text" id="title"/><br>
+    <label for="content">content:</label><br>
+    <textarea id="content" rows=20 cols=80></textarea><br>
+    <button onclick="handleForgeButtonAction()">forge</button>
+</div>
+
+<div>
+    <h4>Get Moments</h4>
+    <button onclick="handleRetrieveButtonAction()">retrieve</button>
+    <p id="moments"></p>
+</div>
+
+
+<script type="text/javascript" src="/js/utility.js"></script>
+<script>
+    const handleChangeButtonAction = () => {
+        const uid = document.getElementById('uid').value;
+        const pwd = document.getElementById('pwd').value;
+        ajax(`/api/${uid}/password`, 'POST', pwd).then((json) => {
+            const account = json['account'];
+            alert(`changed ${account['username']}`);
+            console.log(account['password']);
+        });
+    };
+
+    const handleForgeButtonAction = () => {
+        communicate('/paper', 'POST', build('title', 'content')).then(console.log);
+    };
+
+    const handleRetrieveButtonAction = () => {
+        communicate('/moment', 'GET').then((json) => {
+            document.getElementById('moments').innerText = JSON.stringify(json);
+        })
+    };
+</script>
+</body>
+</html>
