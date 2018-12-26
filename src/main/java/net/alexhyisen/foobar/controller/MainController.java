@@ -15,15 +15,13 @@ import java.util.Collection;
 public class MainController {
     private final MainService mainService;
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
     @Value("${foobar.anonymousUid}")
     private String anonymousUid;
 
     @Autowired
-    public MainController(MainService mainService, UserService userService, PasswordEncoder passwordEncoder) {
+    public MainController(MainService mainService, UserService userService) {
         this.mainService = mainService;
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/api/{uid}/paper")
