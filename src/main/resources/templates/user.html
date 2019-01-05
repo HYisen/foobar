@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>UserInfo</title>
 	<link rel="stylesheet"
 	      href="css/user.css"
 	      type="text/css"/>
 </head>
+
 <body>
 <div id="showUid"
      th:text="${uid}"
@@ -19,36 +20,19 @@
 	      th:text="${nickname}"></span>
 </div>
 
-<div id = "user_column">
-	<form id = "user_form">
-		<p>
-			<label for="old_password">
-				oldPassword:
-			</label>
-			<input type="text" id="old_password">
-		</p>
-
-		<p>
-			<label for="new_password">
-				newPassword:
-			</label>
-			<input type="text" id="new_password">
-		</p>
-
-		<p>
-			<label for="new_nickname">
-				newNickname:
-			</label>
-			<input type="text" id="new_nickname">
-		</p>
+<section class="login-type">
+	<h1 >Facebook</h1>
+	<form method="post" action="/login">
+		<label for="old_password"><input type="old_password" id="old_password" required placeholder="Old password"></label>
+		<label for="new_password"><input type="new_password" id="new_password"required placeholder="New password"></label>
+		<label for="new_nickname"><input type="new_nickname" id="new_nickname"required placeholder="New nickname"></label>
 
 		<input type = "button" id = "cancel_btn" value = "cancel" onclick="window.location.href = 'moments'">
-
 		<input type="button" value="submit" id="submit-btn" onclick="mySubmit()">
-
 	</form>
 
-</div>
+
+</section>
 
 <script language="JavaScript">
     let uid = document.getElementById("showUid").innerText;

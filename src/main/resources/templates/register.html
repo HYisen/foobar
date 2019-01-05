@@ -5,42 +5,16 @@
     <title>register</title>
     <link rel="stylesheet" href="/css/register.css" type="text/css" />
 </head>
-
-<body background="/picture/index1.jpg">
+<body>
 <section class="register-type">
     <h1 >Rigister</h1>
-    <br>
-    <br>
-    <form id = "register_form">
-        <p>
-            <label for="username">
-                Username:
-            </label>
-            <input type="text" id="username">
-        </p>
-
-        <p>
-            <label for="password">
-                Password:
-            </label>
-            <input type="text" id="password">
-        </p>
-        <p>
-            <label for="confirmp">
-                Confirm:
-            </label>
-            <input type="text" id="confirmp">
-        </p>
-        <p>
-            <label for="nickname">
-                Nickname:
-            </label>
-            <input type="text" id="nickname">
-        </p>
-        <br>
+    <form action = "#" method="get">
+        <label for="username"><input type="username" id="username" required placeholder="Username"></label>
+        <label for="password"><input type="password" id="password" required placeholder="Password"></label>
+        <label for="confirmp"><input type="confirmp" id="confirmp" required placeholder="Confirm Password"></label>
+        <label for="nickname"><input type="nickname" id="nickname" required placeholder="Nickname"></label>
         <input type="button" value="submit" id="submit-btn" onclick="myRegister()">
         <input type="button" value="back" id="back-btn" onclick="window.location.href = 'login'">
-
     </form>
 
 </section>
