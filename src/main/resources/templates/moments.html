@@ -48,15 +48,6 @@
 
 			<!-- main right col -->
 			<div class="column col-sm-10 col-xs-11" id="main">
-
-				<!-- top nav -->
-				<div class="navbar navbar-blue navbar-static-top">
-					<div class="navbar-header">
-						<a href="#" class="navbar-brand logo">F</a>
-					</div>
-				</div>
-				<!-- /top nav -->
-
 				<div class="padding">
 					<div class="full col-sm-9">
 
@@ -131,10 +122,13 @@
 											<input type="text" class="form-control" id="pictureURL"
 											       placeholder="picture">
 											</br>
-											<input id="picture_button" type="button" value="insert picture" onclick="inputPicture()">
+											<input class="btn btn-primary" type="button"
+											       value="insert picture" onclick="inputPicture()">
+
+											<button class="btn btn-primary" type="button" onclick="postPaper()" style="float:right">Post
+											</button>
 										</div>
-										<button class="btn btn-primary" type="button" onclick="postPaper()">Post
-										</button>
+
 									</form>
 								</div>
 

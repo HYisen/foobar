@@ -90,6 +90,9 @@ hr {
 .delete_button{
     float:left;
     width:10%;
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
 }
 
 .content{

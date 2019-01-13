@@ -80,6 +80,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
                 .replace(/\n/g, "<br/>")
                 .replace(/&ltimg width=(\d+)% height=(\d+)% src = "(.*)"&gt/g, "<img width=$1% height=$2% src = \"$3\">");
             oneContainer.append(content);
+            oneContainer.append(document.createElement("hr"))
 
 
             container.append(oneContainer);
