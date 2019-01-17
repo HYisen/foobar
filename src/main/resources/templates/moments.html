@@ -9,6 +9,7 @@
 	<link rel="stylesheet"
 	      href="css/friendsUtil.css"
 	      type="text/css"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<script language="JavaScript">
         let pages = 1;
         let end = false;
@@ -28,122 +29,125 @@
 </head>
 
 <body onload="onload()">
-<div id="moments_column_1">
+<div class="wrapper">
+	<div class="box">
+		<div class="row row-offcanvas row-offcanvas-left">
+			<!-- sidebar -->
+			<div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar01">
+				<ul class="nav hidden-xs" id="lg-menu">
+					<li class="active"><a href="javascript:void(0);" onclick="showMoments(false, false, true)">Refresh Moments</a></li>
+					<li><a href="javascript:void(0);" onclick="showMoments(false, true, true)">Show My Papers</a></li>
+					<li><a href="javascript:void(0);" onclick="showFriends()">Refresh Friends</a></li>
+					<li><a href="javascript:void(0);" onclick="showFriends(2)">Refresh Invitement</a></li>
+					<li><a href="javascript:void(0);" onclick="showFriends(1)">Refresh Find Friends</a></li>
+					<li><a href="javascript:void(0);" onclick="window.location.href = 'user'">Change UserInfo</a></li>
+					<li><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+			<!-- /sidebar -->
 
-	<div id="showUid"
-	     th:text="${uid}"
-	     hidden>
-	</div>
+			<!-- main right col -->
+			<div class="column col-sm-10 col-xs-11" id="main">
+				<div class="padding">
+					<div class="full col-sm-9">
 
-	<div class="column_1_show">
-		nickname:
-		<span id="showNickname"
-		      th:text="${nickname}"></span>
-	</div>
-	<button onclick="showMoments(false,false,true)"
-	        class="column_1_button">refreshMoments
-	</button>
-	<button onclick="showMoments(false,true,true)"
-	        class="column_1_button">showMyPapers
-	</button>
-	<button onclick="showFriends()"
-	        class="column_1_button">refreshFriends
-	</button>
-	<button onclick="showFriends(2)"
-	        class="column_1_button">refreshInvite
-	</button>
-	<button onclick="showFriends(1)"
-	        class="column_1_button">refreshFindFriends
-	</button>
-	<button class="column_1_button"
-	        onclick="window.location.href = 'user'">
-		changeUserInfo
-	</button>
-	<a th:href="@{/logout}">
-		<button class="column_1_button">logout</button>
-	</a>
-</div>
+						<!-- content -->
+						<div class="row">
 
-<div id="moments_column_2">
-	<div>
-		<form id="paper_form">
-			<p id="paper_form_1">
-				<label for="paper_form_title">
-					Title:
-				</label>
-				<input type="text"
-				       id="paper_form_title">
-			</p>
-			<p>
-				<textarea type="text"
-				          id="paper_form_content"></textarea>
-			</p>
-			<p>
-				<label for="pictureURL">
-					pictureURL:
-				</label>
-				<input type="text"
-				       id="pictureURL">
-				<input id="picture_button"
-				       type="button"
-				       value="insert picture"
-				       onclick="inputPicture()">
-			</p>
-			<p>
-				<input id="paper_button"
-				       type="button"
-				       value="submit"
-				       onclick="postPaper()">
-			</p>
-		</form>
-	</div>
-	<div>
-		<div id="momentContainer">
+							<!-- main col left -->
+							<div class="col-sm-5">
+
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<p class="lead">
+										<div id="showUid" th:text="${uid}" hidden></div>
+										<span id="showNickname" th:text="${nickname}"></span>
+										</p>
+									</div>
+								</div>
+
+
+								<div class="panel panel-default">
+									<div class="panel-heading"><h4>Friends</h4></div>
+									<div class="panel-body">
+										<div class="list-group">
+											<div id="friendsContainer" class="list-group-item">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading"><h4>Invite Import</h4></div>
+									<div class="panel-body">
+										<div class="list-group">
+											<div id="inviteContainer" class="list-group-item">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading"><h4>Someone You Might Know</h4></div>
+									<div class="panel-body">
+										<div class="list-group">
+											<div id="strangersContainer" class="list-group-item">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="well">
+									<form class="form" id="invite_form">
+										<h4>Invite New Friend</h4>
+										<div class="input-group text-center">
+											<input type="text" class="form-control input-lg" id="invite_form_uid" placeholder="Your Friend's UserID">
+											<span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button" onclick="myInvite()">Invite</button></span>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<!-- main col right -->
+							<div class="col-sm-7">
+
+								<div class="well">
+									<form class="form-horizontal" id="paper_form" role="form">
+										<h4>Post New Moment</h4>
+										<div class="form-group" style="padding:12px;">
+											<input type="text" class="form-control" id = "paper_form_title" placeholder="Title:">
+											</br>
+											<textarea class="form-control" id = "paper_form_content" placeholder="You want to say..."></textarea>
+											</br>
+											<input type="text" class="form-control" id="pictureURL"
+											       placeholder="picture">
+											</br>
+											<input class="btn btn-primary" type="button"
+											       value="insert picture" onclick="inputPicture()">
+
+											<button class="btn btn-primary" type="button" onclick="postPaper()" style="float:right">Post
+											</button>
+										</div>
+
+									</form>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading"><h4>Moments</h4></div>
+									<div class="panel-body">
+										<div id="momentContainer">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div><!--/row-->
+					</div><!-- /col-9 -->
+				</div><!-- /padding -->
+			</div>
+			<!-- /main -->
 		</div>
 	</div>
 </div>
-
-<div id="moments_column_3">
-	<p id="column_3_1">Friends</p>
-	<div id="column_3_div1">
-		<div id="friendsContainer">
-		</div>
-	</div>
-	<hr>
-
-	<div>
-		<form id="invite_form">
-			<p>
-				<label for="invite_form_uid">
-					UserId:
-				</label>
-				<input type="text"
-				       id="invite_form_uid">
-			</p>
-			<p>
-				<input class="friends_button"
-				       type="button"
-				       value="invite"
-				       onclick="myInvite()">
-			</p>
-		</form>
-	</div>
-	<hr>
-
-	<p id="column_3_2">invite import</p>
-	<div id="column_3_div2">
-		<div id="inviteContainer">
-		</div>
-	</div>
-	<hr>
-	<p id="column_3_3">Someone you might know</p>
-	<div id="column_3_div3">
-		<div id="strangersContainer">
-		</div>
-	</div>
-</div>
-
-
 <script language="JavaScript">
     let uid = document.getElementById("showUid").innerText;
     window.onscroll = function () {

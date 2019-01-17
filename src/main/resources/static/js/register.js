@@ -41,7 +41,7 @@ function myRegister() {
     };
 
     ajaxGet(url, (text) => {
-        window.location.href = "heaven";
+        window.location.href = "login";
     }
         )
 }
