@@ -27,7 +27,7 @@ function myRegister() {
         "nickname": nickname
     };
 
-    let url = "http://localhost:8080/api/register";
+    let url = "/api/register";
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {

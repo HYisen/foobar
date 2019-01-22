@@ -9,7 +9,7 @@ function showMoments(isUpdate = false, isFocus = false, isNew = false, focusID =
     console.log("BANG!");
     lastFocusID = focusID;
 
-    let url = "http://localhost:8080/api/" + focusID + (isFocus ? "/paper" : "/moment") + "?limit=" + (isUpdate ? itemInPages + "&skip=" : "") + pages * itemInPages;
+    let url = "/api/" + focusID + (isFocus ? "/paper" : "/moment") + "?limit=" + (isUpdate ? itemInPages + "&skip=" : "") + pages * itemInPages;
 
     console.log(url);
     let ajaxGet = (url, callback) => {
@@ -117,7 +117,7 @@ function postPaper() {
     title_con.value = "";
     content_con.value = "";
 
-    let url = "http://localhost:8080/api/" + uid + "/paper";
+    let url = "/api/" + uid + "/paper";
     console.log(url);
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
@@ -140,7 +140,7 @@ function postPaper() {
 function deletePaper(uid, pid) {
     console.log("delete");
 
-    let url = "http://localhost:8080/api/" + uid + "/paper/" + pid;
+    let url = "/api/" + uid + "/paper/" + pid;
     console.log(url);
     let ajaxGet = (url, callback) => {
         let xmlhttp = new XMLHttpRequest();
