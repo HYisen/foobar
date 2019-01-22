@@ -42,6 +42,11 @@ public class WebController {
         return "my_index";
     }
 
+    @GetMapping(path = "/")
+    public String slash() {
+        return "login";
+    }
+
     @GetMapping(path = "/moments")
     public String moments(Model model, Principal principal) {
         injectPerson(model, principal);
