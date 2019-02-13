@@ -110,6 +110,7 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
             @Param("name") String nickname
     );
 
+    @SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
     @Query("MATCH (a:Account)-[:LINK]->(p:Person {uid: {uid}}) RETURN a.password")
     String findPasswordByUid(@Param("uid") long uid);
 }
