@@ -59,7 +59,7 @@ public interface MainRepository extends Neo4jRepository<Person, Long> {
     );
 
     @Query("MATCH (p:Person) RETURN p.uid AS num ORDER BY num DESC LIMIT 1;")
-    long findMaxUid();
+    Long findMaxUid();
 
     @Query("MATCH (src:Person {uid: {srcUid}}) MATCH (dst:Person {uid: {dstUid}})" +
             " WHERE NOT ((src)-[:FRIEND]-(dst) OR (src)-[:INVITE]-(dst))\n" +

@@ -19,6 +19,11 @@
       "name": "foobar.anonymousNickname",
       "type": "java.lang.String",
       "description": "The nickname of the Person when user is anonymous."
+    },
+    {
+      "name": "foobar.uidBegin",
+      "type": "java.lang.Long",
+      "description": "The initial previous uid if none uid exists in database, which is the brand new one minus 1."
     }
   ]
 }

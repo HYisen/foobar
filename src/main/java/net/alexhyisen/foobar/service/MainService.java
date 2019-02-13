@@ -5,11 +5,13 @@ import net.alexhyisen.foobar.repository.AccountRepository;
 import net.alexhyisen.foobar.repository.MainRepository;
 import net.alexhyisen.foobar.security.AdminProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class MainService {
@@ -22,6 +24,9 @@ public class MainService {
 
     private static long prevPid = 0;
     private static long prevUid = 0;
+
+    @Value("${foobar.uidBegin}")
+    private Long uidBegin;
 
     @Autowired
     public MainService(
@@ -77,7 +82,7 @@ public class MainService {
 
     private long getNextUid() {
         if (prevUid == 0) {
-            prevUid = mainRepository.findMaxUid();
+            prevUid = Optional.ofNullable(mainRepository.findMaxUid()).orElse(uidBegin);
         }
         return ++prevUid;
     }
