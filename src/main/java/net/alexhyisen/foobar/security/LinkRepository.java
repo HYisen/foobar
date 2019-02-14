@@ -1,6 +1,6 @@
 package net.alexhyisen.foobar.security;
 
-import net.alexhyisen.foobar.module.Link;
+import net.alexhyisen.foobar.model.Link;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;

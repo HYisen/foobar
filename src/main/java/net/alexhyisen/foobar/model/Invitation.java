@@ -1,4 +1,4 @@
-package net.alexhyisen.foobar.module;
+package net.alexhyisen.foobar.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

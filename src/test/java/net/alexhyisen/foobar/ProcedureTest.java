@@ -1,7 +1,7 @@
 package net.alexhyisen.foobar;
 
 import com.google.gson.Gson;
-import net.alexhyisen.foobar.module.*;
+import net.alexhyisen.foobar.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

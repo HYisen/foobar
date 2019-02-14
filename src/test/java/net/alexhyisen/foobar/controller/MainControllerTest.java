@@ -1,8 +1,8 @@
 package net.alexhyisen.foobar.controller;
 
-import net.alexhyisen.foobar.module.Paper;
-import net.alexhyisen.foobar.module.Person;
-import net.alexhyisen.foobar.module.Publication;
+import net.alexhyisen.foobar.model.Paper;
+import net.alexhyisen.foobar.model.Person;
+import net.alexhyisen.foobar.model.Publication;
 import net.alexhyisen.foobar.security.AdminProperties;
 import net.alexhyisen.foobar.security.LinkRepository;
 import net.alexhyisen.foobar.security.UserService;

@@ -1,6 +1,6 @@
 package net.alexhyisen.foobar.security;
 
-import net.alexhyisen.foobar.module.Link;
+import net.alexhyisen.foobar.model.Link;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

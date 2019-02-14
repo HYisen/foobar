@@ -1,4 +1,4 @@
-package net.alexhyisen.foobar.module;
+package net.alexhyisen.foobar.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -8,11 +8,13 @@ import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity
 @Data
-public class Account {
+public class Paper {
     @Id
     @GeneratedValue
     @JsonIgnore
     private Long id;
-    private String username;
-    private String password;
+    private Long pid;
+    private String title;
+    private String content;
+
 }

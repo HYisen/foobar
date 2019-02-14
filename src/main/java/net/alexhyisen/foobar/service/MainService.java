@@ -1,6 +1,6 @@
 package net.alexhyisen.foobar.service;
 
-import net.alexhyisen.foobar.module.*;
+import net.alexhyisen.foobar.model.*;
 import net.alexhyisen.foobar.repository.AccountRepository;
 import net.alexhyisen.foobar.repository.MainRepository;
 import net.alexhyisen.foobar.security.AdminProperties;

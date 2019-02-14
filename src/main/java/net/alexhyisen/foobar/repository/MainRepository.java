@@ -1,9 +1,9 @@
 package net.alexhyisen.foobar.repository;
 
-import net.alexhyisen.foobar.module.Invitation;
-import net.alexhyisen.foobar.module.Link;
-import net.alexhyisen.foobar.module.Person;
-import net.alexhyisen.foobar.module.Publication;
+import net.alexhyisen.foobar.model.Invitation;
+import net.alexhyisen.foobar.model.Link;
+import net.alexhyisen.foobar.model.Person;
+import net.alexhyisen.foobar.model.Publication;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
