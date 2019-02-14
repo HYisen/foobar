@@ -3,6 +3,7 @@ package net.alexhyisen.foobar.controller;
 import net.alexhyisen.foobar.model.*;
 import net.alexhyisen.foobar.security.UserService;
 import net.alexhyisen.foobar.service.MainService;
+import net.alexhyisen.foobar.service.ResetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,15 @@ import java.util.Collection;
 public class MainController {
     private final MainService mainService;
     private final UserService userService;
+    private final ResetService resetService;
     @Value("${foobar.anonymousUid}")
     private String anonymousUid;
 
     @Autowired
-    public MainController(MainService mainService, UserService userService) {
+    public MainController(MainService mainService, UserService userService, ResetService resetService) {
         this.mainService = mainService;
         this.userService = userService;
+        this.resetService = resetService;
     }
 
     @GetMapping("/api/{uid}/paper")
@@ -129,7 +132,7 @@ public class MainController {
     public boolean mysubmit(@PathVariable long uid, @RequestBody UserInfo userInfo) {
         String nickname = userInfo.getNickname();
         String password = userInfo.getNewPassword();
-        Long u0=null, u1=null;
+        Long u0 = null, u1 = null;
         if (!nickname.isBlank()) {
             u0 = mainService.updateNickname(uid, userInfo.getOldPassword(), nickname);
         }
@@ -137,6 +140,12 @@ public class MainController {
             u1 = mainService.updatePassword(uid, userInfo.getOldPassword(), password);
         }
         return u0 != null || u1 != null;
+    }
+
+    @PostMapping("/dashboard/reset")
+    public void reset() {
+        resetService.clearDatabase();
+        resetService.load();
     }
 
 }

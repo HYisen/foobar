@@ -7,6 +7,11 @@
 <body>
 
 <div>
+    <h4>RESET DATABASE</h4>
+    <button onclick="handleResetButtonAction()">reset</button>
+</div>
+
+<div>
     <h4>Destination Setup</h4>
     <label for="uid">target uid:</label>
     <input type="text" id="uid">
@@ -55,6 +60,12 @@
         communicate('/moment', 'GET').then((json) => {
             document.getElementById('moments').innerText = JSON.stringify(json);
         })
+    };
+
+    const handleResetButtonAction = () => {
+        ajax(`/dashboard/reset`, 'POST').then(() => {
+            alert(`done`);
+        });
     };
 </script>
 </body>
