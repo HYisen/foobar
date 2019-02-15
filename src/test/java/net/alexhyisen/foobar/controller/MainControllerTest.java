@@ -8,6 +8,7 @@ import net.alexhyisen.foobar.security.LinkRepository;
 import net.alexhyisen.foobar.security.UserService;
 import net.alexhyisen.foobar.security.WebSecurityConfig;
 import net.alexhyisen.foobar.service.MainService;
+import net.alexhyisen.foobar.service.ResetService;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +43,8 @@ public class MainControllerTest {
     private LinkRepository linkRepository;
     @MockBean
     private AdminProperties adminProperties;
+    @MockBean
+    private ResetService resetService;
 
     @Test
     public void momentShouldReturnFromService() throws Exception {
