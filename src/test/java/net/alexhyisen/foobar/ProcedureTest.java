@@ -2,6 +2,7 @@ package net.alexhyisen.foobar;
 
 import com.google.gson.Gson;
 import net.alexhyisen.foobar.model.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = "foobar.enableSecurity=false")
 @AutoConfigureMockMvc
+@Transactional
 public class ProcedureTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,6 +34,13 @@ public class ProcedureTest {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private Gson gson;
+
+    @Before
+    public void setUp() throws Exception {
+        mockMvc
+                .perform(post("/dashboard/reset"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     public void getFriend() throws Exception {
