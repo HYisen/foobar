@@ -93,7 +93,8 @@ function postFriendsRequest(type, dstUid) {         //0 for delInvite;1 for invi
 
     let url;
     if (type == 2)
-        url = "/api/" + dstUid + "/invite/" + uid;
+        //Authorized to patch fishtree1161's code.
+        url = "/api/" + uid + "/invite/import/" + dstUid;
     else
         url = "/api/" + uid + (type == 3 ? "/accept/" : type == 4 ? "/friend/" : "/invite/") + dstUid;
 
