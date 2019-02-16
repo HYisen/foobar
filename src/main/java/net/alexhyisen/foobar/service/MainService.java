@@ -129,13 +129,17 @@ public class MainService {
         return mainRepository.findByUid(uid);
     }
 
-    public Long updatePassword(long uid,String oldRawPassword,String newRawPassword) {
-        assert passwordEncoder.matches(oldRawPassword, mainRepository.findPasswordByUid(uid));
+    public Long updatePassword(long uid, String oldRawPassword, String newRawPassword) {
+        if (!passwordEncoder.matches(oldRawPassword, mainRepository.findPasswordByUid(uid))) {
+            throw new WrongPasswordException();
+        }
         return mainRepository.updatePassword(uid, passwordEncoder.encode(newRawPassword));
     }
 
-    public Long updateNickname(long uid,String oldPassword,String nickname) {
-        assert passwordEncoder.matches(oldPassword, mainRepository.findPasswordByUid(uid));
+    public Long updateNickname(long uid, String oldPassword, String nickname) {
+        if (!passwordEncoder.matches(oldPassword, mainRepository.findPasswordByUid(uid))) {
+            throw new WrongPasswordException();
+        }
         return mainRepository.updateNickname(uid, nickname);
     }
 }
